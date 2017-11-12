@@ -1,0 +1,84 @@
+.hinter {
+  position: fixed;
+  width: 280px;
+  opacity: 0.8;
+  border-radius: 3px;
+  pointer-events: auto;
+  cursor: pointer;
+  padding: 15px;
+  color: #ffffff;
+  z-index: 9999;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
+}
+.hinter:hover {
+  opacity: 1;
+}
+.hinter * {
+  box-sizing: border-box;
+}
+.hinter .hinter-title {
+  margin: 0 0 12px 0;
+}
+.hinter .hinter-body {
+  margin: 0;
+}
+.hinter .hinter-icon {
+  display: block;
+}
+.hinter .hinter-close {
+  /* position: absolute; */
+}
+
+.hinter.top-right {
+  top: 12px;
+  right: 12px;
+}
+.hinter.top-mid {
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hinter.top-left {
+  top: 12px;
+  left: 12px;
+}
+.hinter.bottom-right {
+  bottom: 12px;
+  right: 12px;
+}
+.hinter.bottom-mid {
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hinter.bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+.hinter.mid-right {
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+.hinter.mid-left {
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+}
+
+.hinter.log {
+  color: #333333;
+  background: #fffffc;
+}
+.hinter.info {
+  background: #2ca9e1;
+}
+.hinter.warn {
+  background: #f89406;
+}
+.hinter.error {
+  background: #e9546b;
+}
+.hinter.success {
+  background: #38b48b;
+}
