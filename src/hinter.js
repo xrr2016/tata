@@ -1,6 +1,6 @@
 const hinter = {
-  log () {
-    console.log('hinter log')
+  log (title = '你好。', text = '今天是' + new Date().toLocaleString(), callback, opts = {}) {
+    console.log(title, text)
   },
   info () {
     console.info('hinter info')
