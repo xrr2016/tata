@@ -14,6 +14,9 @@ const hinter = {
   success () {
     console.log('hinter success')    
   },
+  close () {
+    
+  },
   clear () {
     console.log('hinter clear')    
   }

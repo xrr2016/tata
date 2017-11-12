@@ -3,11 +3,11 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 280px;
+  width: 300px;
   opacity: 0.8;
   border-radius: 3px;
   pointer-events: auto;
-  padding: 15px;
+  padding: 12px 14px;
   color: #ffffff;
   z-index: 9999;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
@@ -19,32 +19,30 @@
   box-sizing: border-box;
 }
 .hinter .hinter-icon {
-  display: block;
-  flex: 1;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 2em;
+  color: inherit;
 }
 .hinter .hinter-body {
   margin: 0;
-  flex: 5;
-  padding-right: 15px;
+  padding: 0 14px;
 }
 .hinter .hinter-title {
-  margin: 0 0 12px 0;
+  margin: 0 0 2px 0;
+  font-size: 1rem;  
 }
-/* .hinter .hinter-text {
-  
-} */
+.hinter .hinter-text {
+  margin: 0;
+  font-size: .9rem;
+}
 .hinter .hinter-close {
-  display: block;
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 14px;
+  right: 10px;
   border: none;
   margin: 0;
-  /* font-weight: bold; */
+  padding: 0;
+  font-size: 1rem;
+  font-weight: bold;
   color: inherit;
   cursor: pointer;
   outline: none;
@@ -53,7 +51,6 @@
 .hinter .hinter-close:hover {
   opacity: 0.4;
 }
-
 .hinter.top-right {
   top: 12px;
   right: 12px;
