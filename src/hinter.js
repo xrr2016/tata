@@ -4,7 +4,7 @@ let width = 100
 const hinter = {
   _opts: {
     type: 'log',
-    position: 'tr',
+    position: 'top-right',
     duration: 5000,
     progress: false,
     icon: true,
@@ -15,13 +15,39 @@ const hinter = {
     onClose: null
   },
   hinters: [],
-  render() {
-    
+  _type2Icon(type) {
+    switch (type) {
+      case 'log':
+        return 'textsms'
+      case 'warn':
+        return 'info_outline'
+      case 'success':
+        return 'check'
+      case 'error':
+        return 'block'
+      default:
+        return ''
+    }
+  },
+  _render(title, text, opts) {
+    const icon = hinter._type2Icon(opts.type)
+    let template = `<div class="hinter ${opts.position} ${opts.type}">
+    <i class="hinter-icon material-icons">${icon}</i>
+    <div class="hinter-body">
+      <h4 class="hinter-title">${title}</h4>
+      <p class="hinter-text">${text}</p>
+    </div>
+    ${opts.closeBtn
+      ? '<button class="hinter-close material-icons">clear</button>'
+      : ''}
+    ${opts.progress ? '<div class="hinter-progress"></div>' : ''}
+  </div>`
+    document.body.insertAdjacentHTML('beforeend', template)
   },
   log(
     title = '你好。',
     text = '今天是' + new Date().toLocaleString(),
-    opts = {}
+    opts = this._opts
   ) {
     console.log(title, text)
   },
@@ -34,11 +60,14 @@ const hinter = {
   error() {
     console.error('hinter error')
   },
-  success() {
-    console.log('hinter success')
+  success(title = '你好。', text = '很高兴见到你！', opts = {}) {
+    const _opts = Object.assign(hinter._opts, opts, {
+      type: 'success'
+    })
+    hinter._render(title, text, _opts)
   },
   close() {
-    const timeout =  setTimeout(() => {
+    const timeout = setTimeout(() => {
       console.log('close')
       clearTimeout(timeout)
     }, this._opts.duration)
@@ -46,15 +75,14 @@ const hinter = {
   clear() {
     console.log('hinter clear')
   },
-  _reduceProgress () {
-    this._opts.duration -= (this._opts.duration * 3.5 / 1000)
-    width -= .35
+  _reduceProgress() {
+    this._opts.duration -= this._opts.duration * 3.5 / 1000
+    width -= 0.35
     progress.style.width = width + '%'
     console.log(width)
     const cut = requestAnimationFrame(this._reduceProgress.bind(hinter))
     if (width <= 0) {
       cancelAnimationFrame(cut)
-      console.log('End time', performance.now(), (performance.now() - start) / 1000)
     }
     // const interval = setInterval(() => {
     //   duration -= (duration / 20)
@@ -67,6 +95,3 @@ const hinter = {
     // }, 1000 / 60)
   }
 }
-const start = performance.now()
-console.log('Start time',start)
-requestAnimationFrame(hinter._reduceProgress.bind(hinter))

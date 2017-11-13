@@ -25,6 +25,7 @@
 .hinter .hinter-body {
   margin: 0;
   padding: 0 14px;
+  min-width: 240px;
 }
 .hinter .hinter-title {
   margin: 0 0 2px 0;
