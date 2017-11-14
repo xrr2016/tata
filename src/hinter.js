@@ -1,12 +1,9 @@
-const progress = document.querySelector('.hinter-progress')
-let width = 100
-
-const hinter = {
+const Hinter = {
   _opts: {
     type: 'log',
     position: 'top-right',
     duration: 5000,
-    progress: false,
+    progress: true,
     icon: true,
     closeBtn: true,
     show: 'fadeIn', // slideIn
@@ -30,68 +27,99 @@ const hinter = {
     }
   },
   _render(title, text, opts) {
-    const icon = hinter._type2Icon(opts.type)
-    let template = `<div class="hinter ${opts.position} ${opts.type}">
-    <i class="hinter-icon material-icons">${icon}</i>
-    <div class="hinter-body">
-      <h4 class="hinter-title">${title}</h4>
-      <p class="hinter-text">${text}</p>
-    </div>
-    ${opts.closeBtn
-      ? '<button class="hinter-close material-icons">clear</button>'
-      : ''}
-    ${opts.progress ? '<div class="hinter-progress"></div>' : ''}
-  </div>`
+    const icon = Hinter._type2Icon(opts.type)
+    const id = Hinter._randomId()
+    const hinter = {
+      title,
+      text,
+      opts,
+      id,
+      reduceProgress: Hinter._reduceProgress
+    }
+    Hinter.hinters.push(hinter)
+    document.id = { width: 100 }
+    const template = `
+      <div class="hinter ${opts.position} ${opts.type}" id=${id}>
+        <i class="hinter-icon material-icons">${icon}</i>
+        <div class="hinter-body">
+          <h4 class="hinter-title">${title}</h4>
+          <p class="hinter-text">${text}</p>
+        </div>
+        ${opts.closeBtn
+          ? '<button class="hinter-close material-icons">clear</button>'
+          : ''}
+        ${opts.progress ? '<div class="hinter-progress"></div>' : ''}
+      </div>
+    `
     document.body.insertAdjacentHTML('beforeend', template)
+    document.addEventListener('click', Hinter.close)
+    !!opts.onClick && opts.onClick()
+    !!opts.onClose && opts.onClose()
+    opts.progress &&
+      requestAnimationFrame(hinter.reduceProgress.bind(hinter))
   },
-  log(
-    title = '你好。',
-    text = '今天是' + new Date().toLocaleString(),
-    opts = this._opts
-  ) {
-    console.log(title, text)
+  log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+    const _opts = Object.assign(Hinter._opts, opts, {
+      type: 'log'
+    })
+    Hinter._render(title, text, _opts)
   },
-  info() {
-    console.info('hinter info')
+  info(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+    const _opts = Object.assign(Hinter._opts, opts, {
+      type: 'info'
+    })
+    Hinter._render(title, text, _opts)
   },
-  warn() {
-    console.warn('hinter warn')
+  warn(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+    const _opts = Object.assign(Hinter._opts, opts, {
+      type: 'warn'
+    })
+    Hinter._render(title, text, _opts)
   },
-  error() {
-    console.error('hinter error')
+  error(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+    const _opts = Object.assign(Hinter._opts, opts, {
+      type: 'error'
+    })
+    Hinter._render(title, text, _opts)
   },
-  success(title = '你好。', text = '很高兴见到你！', opts = {}) {
-    const _opts = Object.assign(hinter._opts, opts, {
+  success(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+    const _opts = Object.assign(Hinter._opts, opts, {
       type: 'success'
     })
-    hinter._render(title, text, _opts)
+    Hinter._render(title, text, _opts)
   },
-  close() {
-    const timeout = setTimeout(() => {
-      console.log('close')
-      clearTimeout(timeout)
-    }, this._opts.duration)
+  close(event) {
+    const target = event.target
+    if (target.classList.contains('hinter-close')) {
+      const id = target.parentNode.getAttribute('id')
+      const idx = Hinter.hinters.findIndex(hinter => id === hinter.id)
+      hinter.hinters.splice(idx, 1)
+      document.getElementById(id).style.display = 'none'
+    }
   },
   clear() {
-    console.log('hinter clear')
+    Hinter.hinters.forEach(hinter => {
+      document.getElementById(hinter.id).style.display = 'none'
+    })
+    Hinter.hinters.length = 0
+  },
+  _randomId() {
+    return `Hinter${Date.now()}`
   },
   _reduceProgress() {
-    this._opts.duration -= this._opts.duration * 3.5 / 1000
-    width -= 0.35
-    progress.style.width = width + '%'
-    console.log(width)
-    const cut = requestAnimationFrame(this._reduceProgress.bind(hinter))
-    if (width <= 0) {
+    const id = this.id
+    const progress = document
+      .getElementById(id)
+      .querySelector('.hinter-progress')
+    document.id.width -= 0.35
+    this.opts.duration -= this.opts.duration * 3.5 / 1000
+    progress.style.width = document.id.width + '%'
+    const cut = requestAnimationFrame(
+      this.reduceProgress.bind(this)
+    )
+    if (document.id.width <= 0) {
+      document.getElementById(id).style.display = 'none'
       cancelAnimationFrame(cut)
     }
-    // const interval = setInterval(() => {
-    //   duration -= (duration / 20)
-    //   width -= .5
-    //   progress.style.width = width + '%'
-    //   if (width <= 0) {
-    //     clearInterval(interval)
-    //     progress.style.display = 'none'
-    //   }
-    // }, 1000 / 60)
   }
 }
