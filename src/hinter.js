@@ -4,6 +4,8 @@ const Hinter = {
     position: 'top-right',
     duration: 5000,
     progress: true,
+    progressWidth: 100,
+    holding: false,
     icon: true,
     closeBtn: true,
     show: 'fadeIn', // slideIn
@@ -29,12 +31,14 @@ const Hinter = {
   _render(title, text, opts) {
     const icon = Hinter._type2Icon(opts.type)
     const id = Hinter._randomId()
+    const times = opts.duration / (1000 / 60)
+    const ms = opts.duration / times
+    Object.assign(opts, { reduceTimes: times, perReduceMs: ms })
     const hinter = {
       title,
       text,
       opts,
-      id,
-      reduceProgress: Hinter._reduceProgress
+      id
     }
     Hinter.hinters.push(hinter)
     document.id = { width: 100 }
@@ -52,11 +56,10 @@ const Hinter = {
       </div>
     `
     document.body.insertAdjacentHTML('beforeend', template)
-    document.addEventListener('click', Hinter.close)
-    !!opts.onClick && opts.onClick()
-    !!opts.onClose && opts.onClose()
-    opts.progress &&
-      requestAnimationFrame(hinter.reduceProgress.bind(hinter))
+    !!opts.onClick && typeof opts.onClick === 'function' && opts.onClick()
+    !!opts.onClose && typeof opts.onClose === 'function' && opts.onClose()
+    opts.progress && !opts.holding
+    requestAnimationFrame(Hinter._reduceProgress.bind(hinter, hinter.id))
   },
   log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
     const _opts = Object.assign(Hinter._opts, opts, {
@@ -107,19 +110,20 @@ const Hinter = {
     return `Hinter${Date.now()}`
   },
   _reduceProgress() {
-    const id = this.id
+    const hinter = Hinter.hinters.find(hinter => hinter.id === arguments[0])
+    const id = hinter.id
     const progress = document
       .getElementById(id)
       .querySelector('.hinter-progress')
-    document.id.width -= 0.35
-    this.opts.duration -= this.opts.duration * 3.5 / 1000
-    progress.style.width = document.id.width + '%'
-    const cut = requestAnimationFrame(
-      this.reduceProgress.bind(this)
-    )
-    if (document.id.width <= 0) {
+    hinter.opts.progressWidth -= 100 / hinter.opts.reduceTimes
+    hinter.opts.duration -= hinter.opts.perReduceMs
+
+    progress.style.width = hinter.opts.progressWidth + '%'
+    const cut = requestAnimationFrame(Hinter._reduceProgress.bind(hinter, id))
+    if (hinter.opts.progressWidth <= 0) {
       document.getElementById(id).style.display = 'none'
       cancelAnimationFrame(cut)
     }
   }
 }
+document.addEventListener('click', Hinter.close)
