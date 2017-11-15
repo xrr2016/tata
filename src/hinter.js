@@ -5,7 +5,7 @@ const Hinter = {
     duration: 5000,
     progress: true,
     progressWidth: 100,
-    holding: false,
+    holding: true,
     icon: true,
     closeBtn: true,
     show: 'fadeIn', // slideIn
@@ -27,39 +27,6 @@ const Hinter = {
       default:
         return ''
     }
-  },
-  _render(title, text, opts) {
-    const icon = Hinter._type2Icon(opts.type)
-    const id = Hinter._randomId()
-    const times = opts.duration / (1000 / 60)
-    const ms = opts.duration / times
-    Object.assign(opts, { reduceTimes: times, perReduceMs: ms })
-    const hinter = {
-      title,
-      text,
-      opts,
-      id
-    }
-    Hinter.hinters.push(hinter)
-    document.id = { width: 100 }
-    const template = `
-      <div class="hinter ${opts.position} ${opts.type}" id=${id}>
-        <i class="hinter-icon material-icons">${icon}</i>
-        <div class="hinter-body">
-          <h4 class="hinter-title">${title}</h4>
-          <p class="hinter-text">${text}</p>
-        </div>
-        ${opts.closeBtn
-          ? '<button class="hinter-close material-icons">clear</button>'
-          : ''}
-        ${opts.progress ? '<div class="hinter-progress"></div>' : ''}
-      </div>
-    `
-    document.body.insertAdjacentHTML('beforeend', template)
-    !!opts.onClick && typeof opts.onClick === 'function' && opts.onClick()
-    !!opts.onClose && typeof opts.onClose === 'function' && opts.onClose()
-    opts.progress && !opts.holding
-    requestAnimationFrame(Hinter._reduceProgress.bind(hinter, hinter.id))
   },
   log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
     const _opts = Object.assign(Hinter._opts, opts, {
@@ -106,6 +73,47 @@ const Hinter = {
     })
     Hinter.hinters.length = 0
   },
+  _render(title, text, opts) {
+    const icon = Hinter._type2Icon(opts.type)
+    const id = Hinter._randomId()
+    const times = opts.duration / (1000 / 60)
+    const ms = opts.duration / times
+    Object.assign(opts, { reduceTimes: times, perReduceMs: ms })
+    const hinter = { title, text, opts, id }
+    Hinter.hinters.push(hinter)
+    const idx = Hinter.hinters.findIndex(hinter => hinter.id === id)
+    const prevHinter = Hinter.hinters[idx - 1]
+    const template = `
+      <div class="hinter ${opts.position} ${opts.type}" id=${id}>
+        <i class="hinter-icon material-icons">${icon}</i>
+        <div class="hinter-body">
+          <h4 class="hinter-title">${title}</h4>
+          <p class="hinter-text">${text}</p>
+        </div>
+        ${opts.closeBtn
+          ? '<button class="hinter-close material-icons">clear</button>'
+          : ''}
+        ${!opts.holding && opts.progress
+          ? '<div class="hinter-progress"></div>'
+          : ''}
+      </div>
+    `
+    document.body.insertAdjacentHTML('beforeend', template)
+    if (prevHinter && prevHinter.opts.position === hinter.opts.position) {
+      Hinter._moveDown.call(prevHinter)
+    }
+    !!opts.onClick && typeof opts.onClick === 'function' && opts.onClick()
+    !!opts.onClose && typeof opts.onClose === 'function' && opts.onClose()
+    !opts.holding &&
+      opts.progress &&
+      requestAnimationFrame(Hinter._reduceProgress.bind(hinter, hinter.id))
+  },
+  _moveDown() {
+    const element = document.getElementById(this.id)
+    const len = Hinter.hinters.length - 1
+    const eleHeight = element.getBoundingClientRect().height
+    document.getElementById(this.id).style.top = `${len * eleHeight + 24}px`
+  },
   _randomId() {
     return `Hinter${Date.now()}`
   },
@@ -121,6 +129,8 @@ const Hinter = {
     progress.style.width = hinter.opts.progressWidth + '%'
     const cut = requestAnimationFrame(Hinter._reduceProgress.bind(hinter, id))
     if (hinter.opts.progressWidth <= 0) {
+      const idx = Hinter.hinters.findIndex(hinter => hinter === hinter)
+      Hinter.hinters.splice(idx, 1)
       document.getElementById(id).style.display = 'none'
       cancelAnimationFrame(cut)
     }

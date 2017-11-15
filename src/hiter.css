@@ -25,7 +25,7 @@
 .hinter .hinter-body {
   margin: 0;
   padding: 0 14px;
-  min-width: 240px;
+  min-width: 260px;
 }
 .hinter .hinter-title {
   margin: 0 0 2px 0;
@@ -37,8 +37,8 @@
 }
 .hinter .hinter-close {
   position: absolute;
-  top: 14px;
-  right: 10px;
+  top: 6px;
+  right: 6px;
   border: none;
   margin: 0;
   padding: 0;
