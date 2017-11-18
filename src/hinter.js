@@ -9,7 +9,7 @@ const Hinter = {
     icon: true,
     closeBtn: true,
     show: 'fadeIn', // slideIn
-    hide: 'fadeOut', // SlideOut
+    hide: 'fadeOut', // slideOut
     onClick: null,
     onClose: null
   },
@@ -52,27 +52,41 @@ const Hinter = {
     })
     Hinter._render(title, text, _opts)
   },
-  success(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {
-    onClose: function () { alert('success hinter close.') },
-    onClick: function () { alert('success hinter click.') }
-  }) {
+  success(
+    title = '你好',
+    text = '今天是' + new Date().toLocaleString(),
+    opts = {
+      holding: true,
+      onClose: function() {
+        alert('success hinter close.')
+      },
+      onClick: function() {
+        console.log(this)
+        alert('success hinter click.')
+      }
+    }
+  ) {
     const _opts = Object.assign(Hinter._opts, opts, {
       type: 'success'
     })
     Hinter._render(title, text, _opts)
   },
-  close(event) {
+  _close(event) {
     const target = event.target
-    if (target.classList.contains('hinter-close')) {
-      const id = target.parentNode.getAttribute('id')
-      const hinter = Hinter.hinters.find(hinter => hinter.id === id)
-      const idx = Hinter.hinters.findIndex(hinter => id === hinter.id)
-      hinter.hinters.splice(idx, 1)
-      document.getElementById(id).style.display = 'none'
-      !!hinter.opts.onClose &&
-        typeof hinter.opts.onClose === 'function' &&
-        hinter.opts.onClose.call(hinter)
-    }
+    if (!target.classList.contains('hinter-close')) return
+    const id = target.parentNode.getAttribute('id')
+    const hinter = Hinter.hinters.find(hinter => hinter.id === id)
+    const idx = Hinter.hinters.findIndex(hinter => id === hinter.id)
+    Hinter.hinters.splice(idx, 1)
+    document.getElementById(id).style.display = 'none'
+    !!hinter.opts.onClose &&
+      typeof hinter.opts.onClose === 'function' &&
+      hinter.opts.onClose.call(hinter)
+  },
+  _click (event) {
+    const target = event.target
+    if (target.classList.contains('hinter-close')) return
+    this.opts.onClick.call(this)
   },
   clear() {
     Hinter.hinters.forEach(hinter => {
@@ -91,7 +105,9 @@ const Hinter = {
     const idx = Hinter.hinters.findIndex(hinter => hinter.id === id)
     const prevHinter = Hinter.hinters[idx - 1]
     const template = `
-      <div class="hinter ${opts.position} ${opts.type}" id=${id}>
+      <div class="hinter ${opts.position} ${opts.type} ${opts.show === 'fadeIn'
+      ? 'fade-in '
+      : ''}" id=${id}>
         <i class="hinter-icon material-icons">${icon}</i>
         <div class="hinter-body">
           <h4 class="hinter-title">${title}</h4>
@@ -109,14 +125,16 @@ const Hinter = {
     if (prevHinter && prevHinter.opts.position === hinter.opts.position) {
       Hinter._moveDown.call(prevHinter)
     }
-    !!opts.onClick && typeof opts.onClick === 'function' && document.getElementById(id).addEventListener('click', opts.onClick, {
-      capture: true,
-      once: true
-    })
+    !!opts.onClick &&
+      typeof opts.onClick === 'function' &&
+      document.getElementById(id).addEventListener('click', Hinter._click.bind(hinter), {
+        capture: true,
+        once: true
+      })
     !opts.holding &&
       opts.progress &&
       requestAnimationFrame(Hinter._reduceProgress.bind(hinter, hinter.id))
-    return false  
+    return false
   },
   _moveDown() {
     const element = document.getElementById(this.id)
@@ -135,7 +153,6 @@ const Hinter = {
       .querySelector('.hinter-progress')
     hinter.opts.progressWidth -= 100 / hinter.opts.reduceTimes
     hinter.opts.duration -= hinter.opts.perReduceMs
-
     progress.style.width = hinter.opts.progressWidth + '%'
     const cut = requestAnimationFrame(Hinter._reduceProgress.bind(hinter, id))
     if (hinter.opts.progressWidth <= 0) {
@@ -143,10 +160,10 @@ const Hinter = {
       Hinter.hinters.splice(idx, 1)
       document.getElementById(id).style.display = 'none'
       !!hinter.opts.onClose &&
-      typeof hinter.opts.onClose === 'function' &&
-      hinter.opts.onClose.call(hinter)
+        typeof hinter.opts.onClose === 'function' &&
+        hinter.opts.onClose.call(hinter)
       cancelAnimationFrame(cut)
     }
   }
 }
-document.addEventListener('click', Hinter.close)
+document.addEventListener('click', Hinter._close)

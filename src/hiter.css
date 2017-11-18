@@ -4,7 +4,7 @@
   justify-content: space-around;
   align-items: center;
   width: 300px;
-  opacity: 0.9;
+  opacity: .9;
   border-radius: 3px;
   pointer-events: auto;
   padding: 12px 14px;
@@ -117,4 +117,36 @@
 }
 .hinter.success {
   background: #38b48b;
+}
+
+.hinter.fade-in {
+  animation: .8s ease-in fadeIn;
+}
+.hinter.fade-out {
+  animation: .8s ease-in fadeOut;
+}
+/* .hinter.fade-out {
+} */
+/* .hinter.slide-in-left {
+  
+}
+.hinter.slide-out {
+} */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: .9;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: .9;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
