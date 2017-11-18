@@ -123,7 +123,7 @@
   animation: .8s ease-in fadeIn;
 }
 .hinter.fade-out {
-  animation: .8s ease-in fadeOut;
+  animation: .8s linear fadeOut forwards;
 }
 /* .hinter.fade-out {
 } */

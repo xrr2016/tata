@@ -77,13 +77,21 @@ const Hinter = {
     const id = target.parentNode.getAttribute('id')
     const hinter = Hinter.hinters.find(hinter => hinter.id === id)
     const idx = Hinter.hinters.findIndex(hinter => id === hinter.id)
+    const hideClass = hinter.opts.hide === 'fadeOut' ? 'fade-out' : 'slide-out'  
+    const element = document.getElementById(id)
+    const timeout = setTimeout(() => { 
+      // element.style.display = 'none' 
+      // document.body.removeChild(element)
+      element.remove()
+      clearTimeout(timeout)
+    }, 800)
+    element.classList.add(hideClass)
     Hinter.hinters.splice(idx, 1)
-    document.getElementById(id).style.display = 'none'
     !!hinter.opts.onClose &&
       typeof hinter.opts.onClose === 'function' &&
       hinter.opts.onClose.call(hinter)
   },
-  _click (event) {
+  _click(event) {
     const target = event.target
     if (target.classList.contains('hinter-close')) return
     this.opts.onClick.call(this)
@@ -104,10 +112,9 @@ const Hinter = {
     Hinter.hinters.push(hinter)
     const idx = Hinter.hinters.findIndex(hinter => hinter.id === id)
     const prevHinter = Hinter.hinters[idx - 1]
+    const show = opts.show === 'fadeIn' ? 'fade-in' : 'slide-in'
     const template = `
-      <div class="hinter ${opts.position} ${opts.type} ${opts.show === 'fadeIn'
-      ? 'fade-in '
-      : ''}" id=${id}>
+      <div class="hinter ${opts.position} ${opts.type} ${show}" id=${id}>
         <i class="hinter-icon material-icons">${icon}</i>
         <div class="hinter-body">
           <h4 class="hinter-title">${title}</h4>
@@ -127,10 +134,12 @@ const Hinter = {
     }
     !!opts.onClick &&
       typeof opts.onClick === 'function' &&
-      document.getElementById(id).addEventListener('click', Hinter._click.bind(hinter), {
-        capture: true,
-        once: true
-      })
+      document
+        .getElementById(id)
+        .addEventListener('click', Hinter._click.bind(hinter), {
+          capture: true,
+          once: true
+        })
     !opts.holding &&
       opts.progress &&
       requestAnimationFrame(Hinter._reduceProgress.bind(hinter, hinter.id))
