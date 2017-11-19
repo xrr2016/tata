@@ -102,6 +102,10 @@
   transform: translate(-50%, -50%);
 }
 
+.hinter.text {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.22);
+}
 .hinter.log {
   color: #333333;
   background: #fffffc;

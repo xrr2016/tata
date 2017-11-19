@@ -28,6 +28,12 @@ const Hinter = {
         return ''
     }
   },
+  text(text = '今天是' + new Date().toLocaleString(), opts) {
+    const _opts = Object.assign(Hinter._opts, opts, {
+      type: 'text'
+    })
+    Hinter._render(title, text, _opts)
+  },
   log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
     const _opts = Object.assign(Hinter._opts, opts, {
       type: 'log'
@@ -175,4 +181,6 @@ const Hinter = {
     }
   }
 }
-document.addEventListener('click', Hinter._close)
+if (Hinter.hinters.length) {
+  document.addEventListener('click', Hinter._close)
+}
