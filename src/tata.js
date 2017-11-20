@@ -1,4 +1,4 @@
-import './tata.css'
+// import './tata.css'
 
 const tata = {
   _opts: {
@@ -186,3 +186,5 @@ const tata = {
 if (tata.tatas.length) {
   document.addEventListener('click', tata._close)
 }
+
+export default tata
