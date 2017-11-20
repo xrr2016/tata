@@ -1,29 +1,36 @@
 const path = require('path')
 const webpack = require('webpack')
+const pkg = require('../package.json')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index'),
   output: {
-    filename: '.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: `${pkg.name}.min.js`,
+    path: path.resolve(__dirname, 'dist'),
+    library: `${pkg.name}`,
+    libraryTarget: "umd"
   },
+  devtool: 'source-map',
   module: {
-    rules: [{
-      test: /.jsx?$/,
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+      test: /.js?$/,
       include: [
         path.resolve(__dirname, 'src')
       ],
       exclude: [
-        path.resolve(__dirname, 'node_modules'),
-        path.resolve(__dirname, 'bower_components')
+        path.resolve(__dirname, 'node_modules')
       ],
-      loader: 'babel-loader',
-      query: {
-        presets: ['es2015']
-      }
+      loader: 'babel-loader'
     }]
   },
-  pplugins: [],
+  pplugins: [
+    new webpack.optimize.UglifyJsPlugin()
+  ],
   resolve: {
     extensions: ['.json', '.js', '.jsx', '.css']
   },

@@ -1,0 +1,8 @@
+{
+  "name": "tata",
+  "version": "1.0.0",
+  "main": "dist/tata.min.js",
+  "repository": "git@github.com:xrr2016/tata.git",
+  "author": "xrr2016 <xiaoranran1993@163.com>",
+  "license": "MIT"
+}
