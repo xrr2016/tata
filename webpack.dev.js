@@ -1,5 +1,6 @@
 const path = require('path')
-const webpack = require('webpack');
+const webpack = require('webpack')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -10,6 +11,17 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        use: [ {
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+            removeComments: false,
+            collapseWhitespace: false
+          }
+        }],
+      },
       {
         test: /\.js$/,
         include: [path.resolve(__dirname, 'src')],
@@ -27,10 +39,10 @@ module.exports = {
             options: {
               importLoaders: 1
             }
+          },
+          {
+            loader: 'postcss-loader'
           }
-          // {
-          //   loader: 'postcss-loader'
-          // }
         ]
       }
     ]
@@ -44,7 +56,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 2334,
+    port: 3332,
     hot: true
   },
   plugins: [
