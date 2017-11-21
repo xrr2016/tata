@@ -8,6 +8,8 @@
   --lightGreen: #41C5D3;
   --lightYellow: #FFFA9D;
   --background: #f2f2f2;
+  --white: #ffffff;
+  --fontSize: 10px;
 }
 
 html,
@@ -24,7 +26,14 @@ header {
   padding: 4.5em 2em;
   background: var(--primary);
   & .title {
-    font-size: 4em;
+    font-size: 5em;
+    text-align: center;
+    color: var(--white);
+  }
+  & .sub-title {
+    font-size: calc(var(--fontSize) * 2);
+    text-align: center;
+    color: var(--white);
   }
 }
 
@@ -42,5 +51,5 @@ footer {}
 
 .container {
   width: 95%;
-  max-width: 1000px;
+  max-width: 1024px;
 }
