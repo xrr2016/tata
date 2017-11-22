@@ -4,24 +4,15 @@ const webpack = require('webpack')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './src/index',
+  entry: { 
+    index: './src/index'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.bundle.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        use: [ {
-          loader: 'html-loader',
-          options: {
-            minimize: true,
-            removeComments: false,
-            collapseWhitespace: false
-          }
-        }],
-      },
       {
         test: /\.js$/,
         include: [path.resolve(__dirname, 'src')],
@@ -29,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        include: [path.resolve(__dirname, 'src')],
         use: [
           {
             loader: 'style-loader'
@@ -54,7 +45,7 @@ module.exports = {
   devtool: 'inline-source-map',
   context: __dirname,
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: __dirname,
     compress: true,
     port: 3332,
     hot: true

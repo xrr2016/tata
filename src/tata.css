@@ -1,4 +1,4 @@
-.hinter {
+.tata {
   position: fixed;
   display: flex;
   justify-content: space-around;
@@ -12,30 +12,30 @@
   z-index: 9999;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
 }
-.hinter:hover {
+.tata:hover {
   opacity: 1;
 }
-.hinter * {
+.tata * {
   box-sizing: border-box;
 }
-.hinter .hinter-icon {
+.tata .tata-icon {
   font-size: 2em;
   color: inherit;
 }
-.hinter .hinter-body {
+.tata .tata-body {
   margin: 0;
   padding: 0 14px;
   min-width: 260px;
 }
-.hinter .hinter-title {
+.tata .tata-title {
   margin: 0 0 2px 0;
   font-size: 1rem;  
 }
-.hinter .hinter-text {
+.tata .tata-text {
   margin: 0;
   font-size: .9rem;
 }
-.hinter .hinter-close {
+.tata .tata-close {
   position: absolute;
   top: 6px;
   right: 6px;
@@ -49,7 +49,7 @@
   outline: none;
   background: transparent;
 }
-.hinter-progress {
+.tata-progress {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -57,85 +57,78 @@
   height: 4px;
   background: rgba(0, 0, 0, 0.22);
 }
-.hinter .hinter-close:hover {
+.tata .tata-close:hover {
   opacity: 0.4;
 }
-.hinter.top-right {
+.tata.top-right {
   top: 12px;
   right: 12px;
 }
-.hinter.top-mid {
+.tata.top-mid {
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
 }
-.hinter.top-left {
+.tata.top-left {
   top: 12px;
   left: 12px;
 }
-.hinter.bottom-right {
+.tata.bottom-right {
   bottom: 12px;
   right: 12px;
 }
-.hinter.bottom-mid {
+.tata.bottom-mid {
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
 }
-.hinter.bottom-left {
+.tata.bottom-left {
   bottom: 12px;
   left: 12px;
 }
-.hinter.mid-right {
+.tata.mid-right {
   top: 50%;
   right: 12px;
   transform: translateY(-50%);
 }
-.hinter.mid-left {
+.tata.mid-left {
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
 }
-.hinter.mid-mid {
+.tata.mid-mid {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.hinter.text {
+.tata.text {
   color: #fff;
   background: rgba(0, 0, 0, 0.22);
 }
-.hinter.log {
+.tata.log {
   color: #333333;
   background: #fffffc;
 }
-.hinter.info {
+.tata.info {
   background: #2ca9e1;
 }
-.hinter.warn {
+.tata.warn {
   background: #f89406;
 }
-.hinter.error {
+.tata.error {
   background: #e9546b;
 }
-.hinter.success {
+.tata.success {
   background: #38b48b;
 }
 
-.hinter.fade-in {
+.tata.fade-in {
   animation: .8s ease-in fadeIn;
 }
-.hinter.fade-out {
+.tata.fade-out {
   animation: .8s linear fadeOut forwards;
 }
-/* .hinter.fade-out {
-} */
-/* .hinter.slide-in-left {
-  
-}
-.hinter.slide-out {
-} */
 @keyframes fadeIn {
   from {
     opacity: 0;

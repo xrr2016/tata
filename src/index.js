@@ -1,5 +1,4 @@
 import './index.css'
+// import tata from '../dist/@rocket/tata'
 
-window.addEventListener('load', () => {
-  console.log('loaded', '---------')
-})
+// tata.success()
