@@ -1,4 +1,4 @@
 import './index.css'
-// import tata from '../dist/@rocket/tata'
+// import tata from '../dist/tata'
 
 // tata.success()

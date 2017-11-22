@@ -1,9 +1,10 @@
 {
-  "name": "@rocket/tata",
+  "name": "tata",
   "version": "0.5.0",
-  "main": "dist/@rocket/tata.min.js",
+  "main": "dist/tata.min.js",
+  "module": "src/tata.js",
   "scripts": {
-    "build": "webpack --config webpack.build.js -p",
+    "build": "webpack --config webpack.build.js",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "test": "jest --watchAll --colors --coverage"
   },

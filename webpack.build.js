@@ -5,9 +5,9 @@ const pkg = require('./package.json')
 module.exports = {
   entry: path.join(__dirname, 'src', 'tata'),
   output: {
-    filename: `${pkg.name}.js`,
+    filename: 'tata.js',
     path: path.resolve(__dirname, 'dist'),
-    library: `${pkg.name}`,
+    library: 'tata',
     libraryTarget: 'umd'
   },
   target: 'web',
@@ -29,9 +29,11 @@ module.exports = {
     ]
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin()
-  ],
-  resolve: {
-    extensions: ['.json', '.js', '.jsx', '.css']
-  }
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //     drop_console: false,
+    //   }
+    // })
+  ]
 }

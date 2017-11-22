@@ -136,7 +136,7 @@ const tata = {
       </div>
     `
     document.body.insertAdjacentHTML('beforeend', template)
-    if (prevtata && prevtata.opts.position === ta.opts.position) {
+    if (prevtata && prevtata.opts.position === ta.opts.position && document.getElementById(prevtata.id)) {
       tata._moveDown.call(prevtata)
     }
     !!opts.onClick &&
@@ -154,7 +154,7 @@ const tata = {
   },
   _moveDown() {
     const element = document.getElementById(this.id)
-    const len = this.tatas.length - 1
+    const len = tata.tatas.length - 1
     const eleHeight = element.getBoundingClientRect().height
     document.getElementById(this.id).style.top = `${len * eleHeight + 24}px`
   },
@@ -168,8 +168,16 @@ const tata = {
     const cut = requestAnimationFrame(tata._reduceProgress.bind(tata, id))
     if (ta.opts.progressWidth <= 0) {
       const idx = tata.tatas.findIndex(tata => tata === tata)
+      const element = document.getElementById(id)
       tata.tatas.splice(idx, 1)
-      document.getElementById(id).style.display = 'none'
+      const timeout = setTimeout(() => {
+        if (typeof element.remove === 'function') {
+          element.remove()
+        } else {
+          document.body.removeChild(element)
+        }
+        clearTimeout(timeout)
+      }, 800)
       !!ta.opts.onClose &&
         typeof ta.opts.onClose === 'function' &&
         ta.opts.onClose.call(tata)
@@ -182,4 +190,4 @@ if (tata.tatas.length) {
   document.addEventListener('click', tata._close)
 }
 
-export default tata
+module.exports = tata
