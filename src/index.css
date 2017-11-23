@@ -9,6 +9,12 @@
   --lightYellow: #FFFA9D;
   --background: #f8fafe;
   --white: #ffffff;
+  --log: #fffffc;
+  --info: #2ca9e1;
+  --success: #38b48b;
+  --warn: #f89406;
+  --error: #e9546b;
+  --black: #333333;
   --fontSize: 10px;
 }
 
@@ -37,9 +43,49 @@ header {
   }
 }
 
-main {}
+main {
+  padding: 40px 0;
+}
 
-footer {}
+footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .btn {
+    width: 240px;
+    padding: 12px 24px;
+    font-size: 1.4rem;
+    border: none;
+    margin: 0 12px;
+    cursor: pointer;
+    outline: none;
+    color: var(--white);
+    transition: all .2s ease;
+  }
+  & .btn:hover {
+    transform: translateY(-4px);
+  }
+  & .btn[data-type=text] {
+    background: rgba(0, 0, 0, 2);
+  }
+  & .btn[data-type=log] {
+    color: var(--black);
+    background: var(--log);
+  }
+  & .btn[data-type=info] {
+    background: var(--info);
+  }
+  & .btn[data-type=success] {
+    background: var(--success);
+  }
+  & .btn[data-type=warn] {
+    background: var(--warn);
+  }
+  & .btn[data-type=error] {
+    background: var(--error);
+  }
+}
 
 .loading {
   position: fixed;
