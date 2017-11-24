@@ -7,7 +7,7 @@
   opacity: .9;
   border-radius: 3px;
   pointer-events: auto;
-  padding: 12px 14px;
+  padding: 12px 14px 12px 20px;
   color: #ffffff;
   z-index: 9999;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
@@ -51,7 +51,7 @@
 }
 .tata-progress {
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   width: 100%;
   height: 4px;
@@ -124,16 +124,16 @@
 }
 
 .tata.fade-in {
-  animation: .8s ease-in fadeIn;
+  animation: .4s ease-in fadeIn forwards;
 }
 .tata.fade-out {
-  animation: .8s linear fadeOut forwards;
+  animation: .4s linear fadeOut forwards;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
-
   to {
     opacity: .9;
   }
@@ -142,8 +142,15 @@
   from {
     opacity: .9;
   }
-
   to {
     opacity: 0;
+  }
+}
+@keyframes reduceWidth {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
   }
 }
