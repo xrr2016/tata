@@ -1,12 +1,14 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 :root {
-  --primary: #626EEF;
-  --secondary: #09A8FA;
-  --lightGreen: #41C5D3;
-  --lightYellow: #FFFA9D;
+  --primary: #626eef;
+  --secondary: #09a8fa;
+  --lightGreen: #41c5d3;
+  --lightYellow: #fffa9d;
   --background: #f8fafe;
   --white: #ffffff;
   --log: #fffffc;
@@ -16,6 +18,10 @@
   --error: #e9546b;
   --black: #333333;
   --fontSize: 10px;
+
+  --blackSea: {
+    background-image: linear-gradient(-225deg, #2cd8d5 0%, #6b8dd6 48%, #8e37d7 100%);
+  }
 }
 
 html,
@@ -26,16 +32,20 @@ body {
   background: var(--background);
 }
 
-nav {}
+nav {
+}
 
 header {
   padding: 4.5em 2em;
-  background: var(--primary);
+
+  @apply --blackSea;
+
   & .title {
     font-size: 5em;
     text-align: center;
     color: var(--white);
   }
+
   & .sub-title {
     font-size: calc(var(--fontSize) * 2);
     text-align: center;
@@ -45,47 +55,58 @@ header {
 
 main {
   padding: 40px 0;
+
+  & .btns {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & .btn {
+      width: 180px;
+      font-size: 1.4rem;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 12px;
+      outline: none;
+      color: var(--white);
+      transition: all .2s ease;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+    }
+
+    & .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    & .btn[data-type=text] {
+      background: rgba(0, 0, 0, .9);
+    }
+
+    & .btn[data-type=log] {
+      color: var(--black);
+      background: var(--log);
+    }
+
+    & .btn[data-type=info] {
+      background: var(--info);
+    }
+
+    & .btn[data-type=success] {
+      background: var(--success);
+    }
+
+    & .btn[data-type=warn] {
+      background: var(--warn);
+    }
+
+    & .btn[data-type=error] {
+      background: var(--error);
+    }
+  }
 }
 
 footer {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  & .btn {
-    width: 240px;
-    padding: 14px 24px;
-    font-size: 1.4rem;
-    border: none;
-    margin: 0 12px;
-    cursor: pointer;
-    outline: none;
-    color: var(--white);
-    transition: all .2s ease;
-    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
-  }
-  & .btn:hover {
-    transform: translateY(-4px);
-  }
-  & .btn[data-type=text] {
-    background: rgba(0, 0, 0, 2);
-  }
-  & .btn[data-type=log] {
-    color: var(--black);
-    background: var(--log);
-  }
-  & .btn[data-type=info] {
-    background: var(--info);
-  }
-  & .btn[data-type=success] {
-    background: var(--success);
-  }
-  & .btn[data-type=warn] {
-    background: var(--warn);
-  }
-  & .btn[data-type=error] {
-    background: var(--error);
-  }
 }
 
 .loading {
@@ -98,5 +119,5 @@ footer {
 
 .container {
   width: 95%;
-  max-width: 1024px;
+  max-width: 960px;
 }

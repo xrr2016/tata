@@ -122,9 +122,9 @@ function render(title, text, opts) {
         <h4 class="tata-title">${title}</h4>
         <p class="tata-text">${text}</p>
       </div>
-      ${!!opts.closeBtn &&
-        '<button class="tata-close material-icons">clear</button>'}
-      ${!opts.holding && opts.progress && '<div class="tata-progress"></div>'}
+      ${opts.closeBtn ?
+        '<button class="tata-close material-icons">clear</button>' : ''}
+      ${!opts.holding && opts.progress ? '<div class="tata-progress"></div>' : ''}
     </div>
   `
   document.body.insertAdjacentHTML('beforeend', template)

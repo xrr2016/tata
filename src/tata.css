@@ -12,29 +12,36 @@
   z-index: 9999;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
 }
+
 .tata:hover {
   opacity: 1;
 }
+
 .tata * {
   box-sizing: border-box;
 }
+
 .tata .tata-icon {
   font-size: 2em;
   color: inherit;
 }
+
 .tata .tata-body {
   margin: 0;
   padding: 0 14px;
   min-width: 260px;
 }
+
 .tata .tata-title {
   margin: 0 0 2px 0;
-  font-size: 1rem;  
+  font-size: 1rem;
 }
+
 .tata .tata-text {
   margin: 0;
   font-size: .9rem;
 }
+
 .tata .tata-close {
   position: absolute;
   top: 6px;
@@ -49,6 +56,7 @@
   outline: none;
   background: transparent;
 }
+
 .tata-progress {
   position: absolute;
   bottom: -1px;
@@ -57,45 +65,55 @@
   height: 4px;
   background: rgba(0, 0, 0, 0.22);
 }
+
 .tata .tata-close:hover {
   opacity: 0.4;
 }
+
 .tata.top-right {
   top: 12px;
   right: 12px;
 }
+
 .tata.top-mid {
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
 }
+
 .tata.top-left {
   top: 12px;
   left: 12px;
 }
+
 .tata.bottom-right {
   bottom: 12px;
   right: 12px;
 }
+
 .tata.bottom-mid {
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
 }
+
 .tata.bottom-left {
   bottom: 12px;
   left: 12px;
 }
+
 .tata.mid-right {
   top: 50%;
   right: 12px;
   transform: translateY(-50%);
 }
+
 .tata.mid-left {
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
 }
+
 .tata.mid-mid {
   top: 50%;
   left: 50%;
@@ -103,22 +121,31 @@
 }
 
 .tata.text {
+  padding: 12px;
   color: #fff;
-  background: rgba(0, 0, 0, 0.22);
+  background: #323232;
 }
+.tata.text .tata-close {
+  top: 16px;
+}
+
 .tata.log {
   color: #333333;
   background: #fffffc;
 }
+
 .tata.info {
   background: #2ca9e1;
 }
+
 .tata.warn {
   background: #f89406;
 }
+
 .tata.error {
   background: #e9546b;
 }
+
 .tata.success {
   background: #38b48b;
 }
@@ -126,6 +153,7 @@
 .tata.fade-in {
   animation: .4s ease-in fadeIn forwards;
 }
+
 .tata.fade-out {
   animation: .4s linear fadeOut forwards;
 }
@@ -134,22 +162,27 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: .9;
   }
 }
+
 @keyframes fadeOut {
   from {
     opacity: .9;
   }
+
   to {
     opacity: 0;
   }
 }
+
 @keyframes reduceWidth {
   from {
     width: 100%;
   }
+
   to {
     width: 0%;
   }

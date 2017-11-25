@@ -1,9 +1,9 @@
 import './index.css'
 import tata from '../dist/tata'
 
-const footer = document.querySelector('footer')
+const btns = document.querySelector('.btns')
 
-footer.addEventListener('click', (event) => {
+btns.addEventListener('click', (event) => {
   const target = event.target
   const type = target.dataset.type
 
