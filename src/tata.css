@@ -10,7 +10,7 @@
   padding: 12px 14px 12px 20px;
   color: #ffffff;
   z-index: 9999;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
 }
 
 .tata:hover {
@@ -29,6 +29,7 @@
 .tata .tata-body {
   margin: 0;
   padding: 0 14px;
+  min-height: 38px;
   min-width: 260px;
 }
 
@@ -62,8 +63,9 @@
   bottom: -1px;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.22);
+  height: 5px;
+  border-radius: 0 0 3px 3px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .tata .tata-close:hover {
@@ -121,12 +123,8 @@
 }
 
 .tata.text {
-  padding: 12px;
   color: #fff;
   background: #323232;
-}
-.tata.text .tata-close {
-  top: 16px;
 }
 
 .tata.log {

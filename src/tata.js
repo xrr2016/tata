@@ -6,7 +6,7 @@ document.head.appendChild(iconLink)
 
 const defaultOpts = {
   type: 'log',
-  position: 'top-right',
+  position: 'tr',
   duration: 3000,
   progress: true,
   holding: false,
@@ -17,28 +17,51 @@ const defaultOpts = {
 
 const tatas = []
 const tata = {
-  text(text = '你好, 今天是' + new Date().toLocaleString(), opts = {}) {
+  text(
+    title = '你好',
+    text = '你好, 今天是' + new Date().toLocaleString(),
+    opts = {}
+  ) {
     const _opts = Object.assign({}, defaultOpts, opts, { type: 'text' })
-    const title = ''
     render(title, text, _opts)
   },
-  log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  log(
+    title = '你好',
+    text = '今天是' + new Date().toLocaleString(),
+    opts = {}
+  ) {
     const _opts = Object.assign({}, defaultOpts, opts, { type: 'log' })
     render(title, text, _opts)
   },
-  info(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  info(
+    title = '你好',
+    text = '今天是' + new Date().toLocaleString(),
+    opts = {}
+  ) {
     const _opts = Object.assign({}, defaultOpts, opts, { type: 'info' })
     render(title, text, _opts)
   },
-  warn(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  warn(
+    title = '你好',
+    text = '今天是' + new Date().toLocaleString(),
+    opts = {}
+  ) {
     const _opts = Object.assign({}, defaultOpts, opts, { type: 'warn' })
     render(title, text, _opts)
   },
-  error(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  error(
+    title = '你好',
+    text = '今天是' + new Date().toLocaleString(),
+    opts = {}
+  ) {
     const _opts = Object.assign({}, defaultOpts, opts, { type: 'error' })
     render(title, text, _opts)
   },
-  success(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  success(
+    title = '你好',
+    text = '今天是' + new Date().toLocaleString(),
+    opts = {}
+  ) {
     const _opts = Object.assign({}, defaultOpts, opts, { type: 'success' })
     render(title, text, _opts)
   },
@@ -50,8 +73,35 @@ const tata = {
   }
 }
 
+function mapPostion(pos) {
+  switch (pos) {
+    case 'tr':
+      return 'top-right'
+    case 'tm':
+      return 'top-mid'
+    case 'tl':
+      return 'top-left'
+    case 'mr':
+      return 'mid-right'
+    case 'mm':
+      return 'mid-mid'
+    case 'ml':
+      return 'mid-left'
+    case 'br':
+      return 'bottom-right'
+    case 'bm':
+      return 'bottom-mid'
+    case 'bl':
+      return 'bottom-left'
+    default:
+      return 'top-right'
+  }
+}
+
 function type2Icon(type) {
   switch (type) {
+    case 'text':
+      return 'chat_bubble'
     case 'log':
       return 'textsms'
     case 'info':
@@ -107,6 +157,7 @@ document.addEventListener('click', closeTaTa, false)
 
 function render(title, text, opts) {
   const icon = type2Icon(opts.type)
+  const position = mapPostion(opts.position)
   const id = randomId()
   const ta = { title, text, opts, id }
   const idx = tatas.findIndex(tata => tata.id === id)
@@ -115,15 +166,22 @@ function render(title, text, opts) {
   tatas.push(ta)
 
   const template = `
-    <div class="tata fade-in ${opts.position} ${opts.type}" id=${id}>
+    <div class="tata fade-in ${position} ${opts.type}" id=${id}>
       <i class="tata-icon material-icons">${icon}</i>
       <div class="tata-body">
         <h4 class="tata-title">${title}</h4>
         <p class="tata-text">${text}</p>
       </div>
-      ${opts.closeBtn ?
-        '<button class="tata-close material-icons">clear</button>' : ''}
-      ${!opts.holding && opts.progress ? '<div class="tata-progress"></div>' : ''}
+      ${
+        opts.closeBtn
+          ? '<button class="tata-close material-icons">clear</button>'
+          : ''
+      }
+      ${
+        !opts.holding && opts.progress
+          ? '<div class="tata-progress"></div>'
+          : ''
+      }
     </div>
   `
   document.body.insertAdjacentHTML('beforeend', template)

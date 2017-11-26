@@ -20,7 +20,7 @@
 <body>
   <section class="loading">
     <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue">
+      <div class="spinner-layer spinner-blue-only">
         <div class="circle-clipper left">
           <div class="circle"></div>
         </div>
@@ -43,79 +43,90 @@
     </header>
     <main class="container">
       <section class="row">
-        <div class="col s12 m8 ">
-          <div class="input-field ">
+        <div class="col s12 m8">
+          <h6>Tilte</h6>
+          <div class="input-field">
             <input placeholder="Input your title." id="title" type="text" class="validate">
-            <label for="title">Tilte</label>
           </div>
+          <h6>Text</h6>
           <div class="input-field">
             <input placeholder="Input your text." id="text" type="text" class="validate">
-            <label for="text">Text</label>
           </div>
-          <div class="range-field">
+          <h6 class="p-t-10px">Duration(s)</h6>
+          <div class="range-field m-t-15px">
             <input type="range" id="duration" min="0" max="10" value="3" />
           </div>
-          <div class="">
+          <h6 class="p-t-10px">Position</h6>
+          <div class="m-t-15px">
             <label>
               <input name="position" type="radio" checked />
-              <span>top-right</span>
+              <span>tr</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>top-mid</span>
+              <span>tm</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>top-left</span>
+              <span>tl</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>mid-right</span>
+              <span>ml</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>mid-mid</span>
+              <span>mm</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>mid-left</span>
+              <span>ml</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>bottom-right</span>
+              <span>br</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>bottom-mid</span>
+              <span>bm</span>
             </label>
             <label>
               <input name="position" type="radio" />
-              <span>bottom-left</span>
+              <span>bl</span>
             </label>
           </div>
-          <div class="switch">
-            <label>
-              Off
-              <input type="checkbox">
-              <span class="lever"></span>
-              On
-            </label>
+          <div class="col s4 m4 p-l-0px p-t-10px">
+            <h6>Progress</h6>
+            <div class="switch m-t-15px">
+              <label>
+                false
+                <input type="checkbox">
+                <span class="lever"></span>
+                true
+              </label>
+            </div>
           </div>
-          <div class="switch">
-            <label>
-              Off
-              <input type="checkbox">
-              <span class="lever"></span>
-              On
-            </label>
+          <div class="col s4 m4 p-t-10px">
+            <h6>Holding</h6>
+            <div class="switch m-t-15px">
+              <label>
+                false
+                <input type="checkbox">
+                <span class="lever"></span>
+                true
+              </label>
+            </div>
           </div>
-          <div class="switch">
-            <label>
-              Off
-              <input type="checkbox">
-              <span class="lever"></span>
-              On
-            </label>
+          <div class="col s4 m4 p-t-10px">
+            <h6>CloseBtn</h6>
+            <div class="switch m-t-15px">
+              <label>
+                false
+                <input type="checkbox">
+                <span class="lever"></span>
+                true
+              </label>
+            </div>
           </div>
         </div>
         <section class="col s12 m4 btns">
