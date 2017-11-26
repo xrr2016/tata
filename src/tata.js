@@ -7,6 +7,7 @@ document.head.appendChild(iconLink)
 const defaultOpts = {
   type: 'log',
   position: 'tr',
+  animate: 'fade', // slide
   duration: 3000,
   progress: true,
   holding: false,
@@ -73,7 +74,7 @@ const tata = {
   }
 }
 
-function mapPostion(pos) {
+function mapPostion(pos = 'tr') {
   switch (pos) {
     case 'tr':
       return 'top-right'
@@ -98,7 +99,7 @@ function mapPostion(pos) {
   }
 }
 
-function type2Icon(type) {
+function type2Icon(type = 'text') {
   switch (type) {
     case 'text':
       return 'chat_bubble'
@@ -117,11 +118,50 @@ function type2Icon(type) {
   }
 }
 
+function mapAnimateIn(animate = 'fade', position = 'tr') {
+  if (animate === 'slide') {
+    switch (position) {
+      case 'tr':
+      case 'mr':
+      case 'br':
+        return 'slide-right-in'
+      case 'tl':
+      case 'ml':
+      case 'bl':
+        return 'slide-left-right'
+      case 'tm':
+        return 'slide-top-bottom'
+      case 'bm':
+        return 'slide-bottom-top'  
+    }
+  }
+  return 'fade-in'
+}
+function mapAnimateOut(animate = 'fade', position = 'tr') {
+  if (animate === 'slide') {
+    switch (position) {
+      case 'tr':
+      case 'mr':
+      case 'br':
+        return 'slide-right-out'
+      case 'tl':
+      case 'ml':
+      case 'bl':
+        return 'slide-left-out'
+      case 'tm':
+        return 'slide-top-out'
+      case 'bm':
+        return 'slide-bottom-out'  
+    }
+  }
+  return 'fade-out'
+}
+
 function randomId() {
   return `tata-${Date.now()}`
 }
 
-function click(event) {
+function clickTaTa(event) {
   const target = event.target
   if (target.classList.contains('tata-close')) return
   this.opts.onClick.call(this)
@@ -134,7 +174,8 @@ function closeTaTa(event) {
   const ta = tatas.find(ta => ta.id === id)
   const element = document.getElementById(id)
 
-  element.classList.add('fade-out')
+  console.log(mapAnimateOut(ta.opts.animate, ta.opts.position))
+  element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position))
   removeElement(element)
 
   !!ta.opts.onClose &&
@@ -153,11 +194,10 @@ function removeElement(element) {
   }, 800)
 }
 
-document.addEventListener('click', closeTaTa, false)
-
 function render(title, text, opts) {
   const icon = type2Icon(opts.type)
   const position = mapPostion(opts.position)
+  const animate = mapAnimateIn(opts.animate, opts.position)
   const id = randomId()
   const ta = { title, text, opts, id }
   const idx = tatas.findIndex(tata => tata.id === id)
@@ -166,7 +206,7 @@ function render(title, text, opts) {
   tatas.push(ta)
 
   const template = `
-    <div class="tata fade-in ${position} ${opts.type}" id=${id}>
+    <div class="tata ${opts.type} ${animate} ${position}" id=${id}>
       <i class="tata-icon material-icons">${icon}</i>
       <div class="tata-body">
         <h4 class="tata-title">${title}</h4>
@@ -189,9 +229,10 @@ function render(title, text, opts) {
     removeElement(document.getElementById(prevtata.id))
   }
   const element = document.getElementById(id)
+
   !!opts.onClick &&
     typeof opts.onClick === 'function' &&
-    element.addEventListener('click', click.bind(ta), {
+    element.addEventListener('click', clickTaTa.bind(ta), {
       capture: true,
       once: true
     })
@@ -205,7 +246,8 @@ function render(title, text, opts) {
     const timeout = setTimeout(() => {
       const idx = tatas.findIndex(ta => ta === ta)
       tatas.splice(idx, 1)
-      element.classList.add('fade-out')
+      console.log(mapAnimateOut(ta.opts.animate, ta.opts.position))
+      element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position))
       console.log(performance.now())
       removeElement(element)
       !!ta.opts.onClose &&
@@ -214,5 +256,7 @@ function render(title, text, opts) {
     }, opts.duration)
   }
 }
+
+document.addEventListener('click', closeTaTa, false)
 
 module.exports = tata

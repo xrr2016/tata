@@ -22,6 +22,12 @@
   --blackSea: {
     background-image: linear-gradient(-225deg, #2cd8d5 0%, #6b8dd6 48%, #8e37d7 100%);
   }
+
+  --space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 html,
@@ -60,13 +66,13 @@ body {
 .m-t-15px {
   margin-top: 15px !important;
 }
+
 nav {
 }
 
 header {
   position: relative;
   padding: 4.5em 0;
-
   @apply --blackSea;
 
   & .title {
@@ -93,24 +99,36 @@ header {
 }
 
 main {
-  padding: 40px 0;
+  padding: 20px 0;
+
+  & .opts {
+    margin-bottom: 40px;
+  }
+
+  & .postions {
+    @apply --space-between;
+  }
+  & .switchs {
+    @apply --space-between;
+  }
 
   & .btns {
     padding: 20px 0;
+    margin-top: 11.5px;
+    margin-bottom: 40px;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
     flex-wrap: wrap;
-    width: 50%;
+    justify-content: space-between;
+    align-items: center;
 
     & .btn {
       width: 180px;
       font-size: 1.4rem;
       border: none;
       cursor: pointer;
-      margin-bottom: 24px;
       outline: none;
+      margin-bottom: 38px;
       color: var(--white);
       transition: all .2s ease;
     }

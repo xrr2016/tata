@@ -156,6 +156,22 @@
   animation: .4s linear fadeOut forwards;
 }
 
+.tata.slide-right-in {
+  animation: .4s ease slideRightIn forwards;
+}
+.tata.slide-right-out {
+  animation: .4s ease slideRightOut forwards;
+}
+.tata.slide-left-right {
+  animation: .4s ease left2right forwards;
+}
+.tata.slide-top-bottom {
+  animation: .4s ease top2bottom forwards;
+}
+.tata.slide-bottom-top {
+  animation: .4s ease bottom2top forwards;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -175,6 +191,49 @@
     opacity: 0;
   }
 }
+
+@keyframes slideRightIn {
+  from {
+    right: -310px;
+  }
+  to {
+    right: 12px;
+  }
+}
+@keyframes slideRightOut {
+  from {
+    right: 12px;
+  }
+  to {
+    right: -310px;
+  }
+}
+
+@keyframes left2right {
+  from {
+    left: -310px;
+  }
+  to {
+    left: 12px;
+  }
+}
+@keyframes top2bottom {
+  from {
+    top: calc(-100% + -12px);
+  }
+  to {
+    top: 12px;
+  }
+}
+@keyframes bottom2top {
+  from {
+    bottom: calc(-100% + -12px);
+  }
+  to {
+    bottom: 12px;
+  }
+}
+
 
 @keyframes reduceWidth {
   from {

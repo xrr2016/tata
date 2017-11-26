@@ -43,7 +43,7 @@
     </header>
     <main class="container">
       <section class="row">
-        <div class="col s12 m8">
+        <div class="col s12 m8 opts">
           <h6>Tilte</h6>
           <div class="input-field">
             <input placeholder="Input your title." id="title" type="text" class="validate">
@@ -57,7 +57,7 @@
             <input type="range" id="duration" min="0" max="10" value="3" />
           </div>
           <h6 class="p-t-10px">Position</h6>
-          <div class="m-t-15px">
+          <div class="postions m-t-15px">
             <label>
               <input name="position" type="radio" checked />
               <span>tr</span>
@@ -95,41 +95,78 @@
               <span>bl</span>
             </label>
           </div>
-          <div class="col s4 m4 p-l-0px p-t-10px">
-            <h6>Progress</h6>
-            <div class="switch m-t-15px">
-              <label>
-                false
-                <input type="checkbox">
-                <span class="lever"></span>
-                true
-              </label>
+          <div class="switchs p-t-10px">
+            <div>
+              <h6>Progress</h6>
+              <div class="switch m-t-15px">
+                <label>
+                  false
+                  <input type="checkbox" checked>
+                  <span class="lever"></span>
+                  true
+                </label>
+              </div>
+            </div>
+            <div>
+              <h6>Holding</h6>
+              <div class="switch m-t-15px">
+                <label>
+                  false
+                  <input type="checkbox">
+                  <span class="lever"></span>
+                  true
+                </label>
+              </div>
+            </div>
+            <div>
+              <h6>CloseBtn</h6>
+              <div class="switch m-t-15px">
+                <label>
+                  false
+                  <input type="checkbox" checked>
+                  <span class="lever"></span>
+                  true
+                </label>
+              </div>
             </div>
           </div>
-          <div class="col s4 m4 p-t-10px">
-            <h6>Holding</h6>
-            <div class="switch m-t-15px">
-              <label>
-                false
-                <input type="checkbox">
-                <span class="lever"></span>
-                true
-              </label>
+          <div class="switchs p-t-10px">
+            <div>
+              <h6>CloseBtn</h6>
+              <div class="switch m-t-15px">
+                <label>
+                  false
+                  <input type="checkbox" checked>
+                  <span class="lever"></span>
+                  true
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="col s4 m4 p-t-10px">
-            <h6>CloseBtn</h6>
-            <div class="switch m-t-15px">
-              <label>
-                false
-                <input type="checkbox">
-                <span class="lever"></span>
-                true
-              </label>
+            <div>
+              <h6>onClcik</h6>
+              <div class="switch m-t-15px">
+                <label>
+                  false
+                  <input type="checkbox">
+                  <span class="lever"></span>
+                  true
+                </label>
+              </div>
+            </div>
+            <div>
+              <h6>onClose</h6>
+              <div class="switch m-t-15px">
+                <label>
+                  false
+                  <input type="checkbox">
+                  <span class="lever"></span>
+                  true
+                </label>
+              </div>
             </div>
           </div>
         </div>
-        <section class="col s12 m4 btns">
+        <section class="col s12 m3 offset-m1 btns">
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="text">Text</button>
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="log">Log</button>
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="info">Info</button>
@@ -143,7 +180,6 @@
   <footer>
   </footer>
   <script src="index.js"></script>
-  <script src="./dist/tata.js"></script>
 </body>
 
 </html>

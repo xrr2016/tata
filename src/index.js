@@ -18,7 +18,11 @@ document.addEventListener('readystatechange', () => {
     
       if (!type) return
     
-      tata[type]()
+      tata[type]('hello', 'wow!', {
+        duration: 4000,
+        animate: 'slide',
+        position: 'tr'
+      })
     })
   }
 })
