@@ -26,18 +26,36 @@
 
 html,
 body {
+  display: flex;
   margin: 0;
   height: 100%;
+  min-height: 100vh;
+  flex-direction: column;
   font-family: system-ui;
   background: var(--background);
 }
-
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.wrapper {
+  flex: 1 0 auto;
+}
 nav {
 }
 
 header {
   position: relative;
   padding: 4.5em 0;
+
   @apply --blackSea;
 
   & .title {
@@ -69,10 +87,12 @@ main {
   & .btns {
     padding: 20px 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
     width: 50%;
+
     & .btn {
       width: 180px;
       font-size: 1.4rem;
@@ -82,7 +102,6 @@ main {
       outline: none;
       color: var(--white);
       transition: all .2s ease;
-      box-shadow: 0 0 4px rgba(0, 0, 0, .2);
     }
 
     & .btn:hover {

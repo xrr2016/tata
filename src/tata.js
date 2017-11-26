@@ -10,7 +10,6 @@ const defaultOpts = {
   duration: 3000,
   progress: true,
   holding: false,
-  icon: true,
   closeBtn: true,
   onClick: null,
   onClose: null
