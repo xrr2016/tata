@@ -21,7 +21,8 @@ document.addEventListener('readystatechange', () => {
       tata[type]('hello', 'wow!', {
         duration: 4000,
         animate: 'slide',
-        position: 'tr'
+        position: 'tm',
+        holding: true
       })
     })
   }

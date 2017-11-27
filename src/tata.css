@@ -10,7 +10,7 @@
   padding: 12px 14px 12px 20px;
   color: #ffffff;
   z-index: 9999;
-  box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 }
 
 .tata:hover {
@@ -159,17 +159,33 @@
 .tata.slide-right-in {
   animation: .4s ease slideRightIn forwards;
 }
+
 .tata.slide-right-out {
   animation: .4s ease slideRightOut forwards;
 }
-.tata.slide-left-right {
-  animation: .4s ease left2right forwards;
+
+.tata.slide-left-in {
+  animation: .4s ease slideLeftIn forwards;
 }
-.tata.slide-top-bottom {
-  animation: .4s ease top2bottom forwards;
+
+.tata.slide-left-out {
+  animation: .4s ease slideLeftOut forwards;
 }
-.tata.slide-bottom-top {
-  animation: .4s ease bottom2top forwards;
+
+.tata.slide-top-in {
+  animation: .4s ease slideTopIn forwards;
+}
+
+.tata.slide-top-out {
+  animation: .4s ease slideTopOut forwards;
+}
+
+.tata.slide-bottom-in {
+  animation: .4s ease slideBottomIn forwards;
+}
+
+.tata.slide-bottom-out {
+  animation: .4s ease slideBottomOut forwards;
 }
 
 @keyframes fadeIn {
@@ -196,44 +212,81 @@
   from {
     right: -310px;
   }
+
   to {
     right: 12px;
   }
 }
+
 @keyframes slideRightOut {
   from {
     right: 12px;
   }
+
   to {
     right: -310px;
   }
 }
 
-@keyframes left2right {
+@keyframes slideLeftIn {
   from {
     left: -310px;
   }
+
   to {
     left: 12px;
   }
 }
-@keyframes top2bottom {
+
+@keyframes slideLeftOut {
+  from {
+    left: 12px;
+  }
+
+  to {
+    left: -310px;
+  }
+}
+
+@keyframes slideTopIn {
   from {
     top: calc(-100% + -12px);
   }
+
   to {
     top: 12px;
   }
 }
-@keyframes bottom2top {
+
+@keyframes slideTopOut {
+  from {
+    top: 12px;
+  }
+
+  to {
+    top: calc(-100% + -12px);
+  }
+}
+
+@keyframes slideBottomIn {
   from {
     bottom: calc(-100% + -12px);
   }
+
   to {
     bottom: 12px;
   }
 }
 
+@keyframes slideBottomOut {
+  from {
+    bottom: 12px;
+  }
+
+  to {
+    bottom: calc(-100% + -12px);
+  }
+}
 
 @keyframes reduceWidth {
   from {
