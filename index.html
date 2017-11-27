@@ -43,14 +43,14 @@
     </header>
     <main class="container">
       <section class="row">
-        <div id="opts" class="col s12 m8 opts">
+        <form id="opts" class="col s12 m8 opts">
           <h6>Tilte</h6>
           <div class="input-field">
-            <input placeholder="Input your title." name="title" id="title" type="text" class="validate">
+            <input placeholder="Input your title." name="title" id="title" type="text" class="validate" value="Hello">
           </div>
           <h6>Text</h6>
           <div class="input-field">
-            <input placeholder="Input your text." name="text" id="text" type="text" class="validate">
+            <input placeholder="Input your text." name="text" id="text" type="text" class="validate" value="Nice to meet you.">
           </div>
           <h6 class="p-t-10px">Duration(s)</h6>
           <div class="range-field m-t-15px">
@@ -59,39 +59,39 @@
           <h6 class="p-t-10px">Position</h6>
           <div class="postions m-t-15px">
             <label>
-              <input name="position" type="radio" checked />
+              <input name="position" type="radio" checked value="tr" />
               <span>tr</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="tm"/>
               <span>tm</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="tl" />
               <span>tl</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="ml" />
               <span>ml</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="mm" />
               <span>mm</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="ml" />
               <span>ml</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="vr" />
               <span>br</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="bm" />
               <span>bm</span>
             </label>
             <label>
-              <input name="position" type="radio" />
+              <input name="position" type="radio" value="bl"/>
               <span>bl</span>
             </label>
           </div>
@@ -165,7 +165,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </form>
         <section class="col s12 m3 offset-m1 btns">
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="text">Text</button>
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="log">Log</button>

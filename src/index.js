@@ -18,13 +18,18 @@ document.addEventListener('readystatechange', () => {
       const type = target.dataset.type
       if (!type) return
 
+      const opts = document.forms[0]
+      console.dir(opts.text)
       const title = document.getElementById('title').value
       const text = document.getElementById('text').value
 
-      tata[type](title = 'Hello', text = 'Nice to meet you.', {
-        duration: document.getElementById('duration').value,
-        
-      })
+      const pos = document.querySelectorAll('input[name=position]')
+
+
+      // tata[type](title = 'Hello', text = 'Nice to meet you.', {
+      //   duration: document.getElementById('duration').value,
+      //   position: 
+      // })
     })
   }
 })
