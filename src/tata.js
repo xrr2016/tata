@@ -128,11 +128,11 @@ function mapAnimateIn(animate = 'fade', position = 'tr') {
       case 'tl':
       case 'ml':
       case 'bl':
-        return 'slide-left-right'
+        return 'slide-left-in'
       case 'tm':
-        return 'slide-top-bottom'
+        return 'slide-top-in'
       case 'bm':
-        return 'slide-bottom-top'  
+        return 'slide-bottom-in'  
     }
   }
   return 'fade-in'

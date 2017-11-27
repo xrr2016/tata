@@ -89,18 +89,18 @@
 }
 
 .tata.bottom-right {
-  bottom: 12px;
   right: 12px;
+  bottom: 18px;
 }
 
 .tata.bottom-mid {
-  bottom: 12px;
   left: 50%;
+  bottom: 18px;
   transform: translateX(-50%);
 }
 
 .tata.bottom-left {
-  bottom: 12px;
+  bottom: 18px;
   left: 12px;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .tata.mid-mid {
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -252,7 +252,6 @@
   from {
     top: calc(-100% + -12px);
   }
-
   to {
     top: 12px;
   }
@@ -262,7 +261,6 @@
   from {
     top: 12px;
   }
-
   to {
     top: calc(-100% + -12px);
   }
@@ -270,21 +268,19 @@
 
 @keyframes slideBottomIn {
   from {
-    bottom: calc(-100% + -12px);
+    bottom: calc(-100% + -18px);
   }
-
   to {
-    bottom: 12px;
+    bottom: 18px;
   }
 }
 
 @keyframes slideBottomOut {
   from {
-    bottom: 12px;
+    bottom: 18px;
   }
-
   to {
-    bottom: calc(-100% + -12px);
+    bottom: calc(-100% + -18px);
   }
 }
 
