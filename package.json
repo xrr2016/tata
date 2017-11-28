@@ -1,7 +1,7 @@
 {
-  "name": "tata",
+  "name": "@rocket/tata",
   "version": "0.5.0",
-  "main": "dist/tata.min.js",
+  "main": "dist/tata.js",
   "module": "src/tata.js",
   "scripts": {
     "build": "webpack -w --config webpack.build.js",

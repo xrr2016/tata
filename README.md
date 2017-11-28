@@ -5,41 +5,30 @@
 ## Install
 
 > npm i --save @rocket/tata
-or
-> yarn add @rocket/tata
 
 ## Usage
 
 ```js
-tata.text('Hello World', '很高兴见到你。', {// config})
-tata.log('Hello World', '很高兴见到你。', {// config})
-tata.info('Hello World', '很高兴见到你。', {// config})
-tata.success('Hello World', '很高兴见到你。', {// config})
-tata.warn('Hello World', '很高兴见到你。', {// config})
-tata.error('Hello World', '很高兴见到你。', {// config})
+tata.text('Hello', 'Have a nice day.', {// config})
+tata.log('Hello', 'Have a nice day.', {// config})
+tata.info('Hello', 'Have a nice day.', {// config})
+tata.success('Hello', 'Have a nice day.', {// config})
+tata.warn('Hello', 'Have a nice day.', {// config})
+tata.error('Hello', 'Have a nice day.', {// config})
 ```
 
 ## Config
 
-```js
-type: 'log'
-position: 'top-right'
-duration: 3000
-progress: true
-progressWidth: 100
-holding: false
-icon: true
-closeBtn: true
-show: 'fadeIn'  // slideIn
-hide: 'fadeOut' // slideOut
-onClick: null
-onClose: null
-```
-
-### Api
-
-```js
-```
+| name | tpye | default | Description |
+|---------|--------|--------|-------------|
+| position | string | tr | tr, tm, tl, mr, mm, ml, bl, bm, br |
+| duration | number | 3000 | show haw many time |
+| progress | boolean | true | dispaly a progress bar |
+| holding | boolean | false | no disappear |
+| closeBtn | boolean | true | show close button |
+| animate | string | fade | fade or slide |
+| onClick | function | null | callback function on click |
+| onClose | function | null | callback function on close |
 
 ## License
 
