@@ -1,6 +1,14 @@
 import './index.css'
 import tata from '../dist/tata'
 
+function onClick () {
+  alert('clicked.')
+}
+
+function onClose () {
+  alert('closed.')
+}
+
 document.addEventListener('readystatechange', () => {
   if (document.readyState === 'complete') {
     const loading = document.querySelector('.loading')
@@ -18,18 +26,22 @@ document.addEventListener('readystatechange', () => {
       const type = target.dataset.type
       if (!type) return
 
-      const opts = document.forms[0]
-      console.dir(opts.text)
       const title = document.getElementById('title').value
       const text = document.getElementById('text').value
+      const position = [...document.querySelectorAll('input[name=position]')].find(
+        input => input.checked
+      ).value
 
-      const pos = document.querySelectorAll('input[name=position]')
-
-
-      // tata[type](title = 'Hello', text = 'Nice to meet you.', {
-      //   duration: document.getElementById('duration').value,
-      //   position: 
-      // })
+      tata[type](title, text, {
+        duration: document.getElementById('duration').value * 1000,
+        position,
+        progress: document.querySelector('input[name=progress]').checked,        
+        holding: document.querySelector('input[name=holding]').checked,        
+        animate: document.querySelector('input[name=animate]').checked ? 'slide' : 'fade',
+        closeBtn: document.querySelector('input[name=closeBtn]').checked,
+        onClick: document.querySelector('input[name=onClick]').checked ? onClick : null,
+        onClose: document.querySelector('input[name=onClose]').checked ? onClose : null,
+      })
     })
   }
 })
