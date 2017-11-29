@@ -1,6 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const pkg = require('./package.json')
 const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
@@ -33,7 +32,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-        drop_console: false
+        drop_console: true
       }
     }),
     new CompressionPlugin({

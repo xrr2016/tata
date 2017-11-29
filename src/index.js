@@ -19,8 +19,8 @@ function onClose () {
 
 document.addEventListener('readystatechange', () => {
   if (document.readyState === 'complete') {
-    const loading = document.querySelector('.loading')
-    const btns = document.querySelector('.btns')
+    const loading = $('.loading')
+    const btns = $('.btns')
     
     if (loading.remove) {
       loading.remove()
@@ -33,21 +33,21 @@ document.addEventListener('readystatechange', () => {
       const type = target.dataset.type
       if (!type) return
 
-      const title = document.getElementById('title').value
-      const text = document.getElementById('text').value
-      const position = [...document.querySelectorAll('input[name=position]')].find(
+      const title = $('#title').value
+      const text = $('#text').value
+      const position = [...$$('input[name=position]')].find(
         input => input.checked
       ).value
 
       tata[type](title, text, {
-        duration: document.getElementById('duration').value * 1000,
+        duration: $('#duration').value * 1000,
         position,
-        progress: document.querySelector('input[name=progress]').checked,        
-        holding: document.querySelector('input[name=holding]').checked,        
-        animate: document.querySelector('input[name=animate]').checked ? 'slide' : 'fade',
-        closeBtn: document.querySelector('input[name=closeBtn]').checked,
-        onClick: document.querySelector('input[name=onClick]').checked ? onClick : null,
-        onClose: document.querySelector('input[name=onClose]').checked ? onClose : null,
+        progress: $('input[name=progress]').checked,        
+        holding: $('input[name=holding]').checked,        
+        animate: $('input[name=animate]').checked ? 'slide' : 'fade',
+        closeBtn: $('input[name=closeBtn]').checked,
+        onClick: $('input[name=onClick]').checked ? onClick : null,
+        onClose: $('input[name=onClose]').checked ? onClose : null,
       })
     })
   }
