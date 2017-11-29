@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
+const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'tata'),
@@ -18,7 +19,7 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /.js?$/,
@@ -32,8 +33,11 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-        drop_console: false,
+        drop_console: false
       }
+    }),
+    new CompressionPlugin({
+      algorithm: 'gzip'
     })
   ]
 }
