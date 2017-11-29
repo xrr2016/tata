@@ -1,6 +1,6 @@
 {
-  "name": "@rocket/tata",
-  "version": "0.5.0",
+  "name": "tata-js",
+  "version": "0.1.0",
   "main": "dist/tata.js",
   "module": "src/tata.js",
   "scripts": {
