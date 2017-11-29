@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
 :root {
   --primary: #626eef;
   --secondary: #09a8fa;
@@ -30,7 +38,6 @@
   }
 }
 
-html,
 body {
   display: flex;
   margin: 0;
@@ -57,35 +64,39 @@ body {
 .wrapper {
   flex: 1 0 auto;
 }
+
 .p-l-0px {
   padding-left: 0 !important;
 }
+
 .p-t-10px {
   padding-top: 10px !important;
 }
+
 .m-t-15px {
   margin-top: 15px !important;
 }
 
-nav {
-}
-
 header {
   position: relative;
+  width: 100%;
   padding: 40px 0;
+  text-align: center;
+
   @apply --blackSea;
 
   & .title {
     font-size: 5em;
     text-align: center;
-    margin-bottom: 12px;
+    margin: 0;
+    margin-bottom: 24px;
     color: var(--white);
   }
 
   & .sub-title {
     width: 100%;
     font-size: calc(var(--fontSize) * 2);
-    margin-top: 0;
+    margin: 24px 0 32px 0;
     text-align: center;
     color: var(--white);
   }
@@ -108,8 +119,17 @@ main {
   }
 
   & .postions {
-    @apply --space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & label {
+      max-width: 60px;
+      min-width: 50px;
+    }
   }
+
   & .switchs {
     @apply --space-between;
   }
@@ -121,7 +141,7 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     & .btn {
@@ -166,5 +186,8 @@ main {
   }
 }
 
-footer {
+@media (max-width: 600px) {
+  main .postions {
+    justify-content: flex-start;
+  }
 }

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TaTa</title>
   <meta name="description" content="TaTa.js 一个简洁有效的弹出消息插件。">
@@ -14,7 +14,6 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.1/css/materialize.min.css">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.1/js/materialize.min.js"></script>
-
 </head>
 
 <body>
@@ -34,16 +33,16 @@
     </div>
   </section>
   <div class="wrapper">
-    <!-- <nav></nav> -->
     <header>
       <h1 class="title">TaTa.js</h1>
-      <h2 class="sub-title">A simple prompt library.</h2>
-      <!-- <section class="github-items"> -->
-      </section>
+      <h2 class="sub-title">A simple prompt library</h2>
+      <a class="waves-effect waves-light blue darken-1 btn download" href="./dist/tata.js" download>
+        Download
+      </a>
     </header>
     <main class="container">
       <section class="row">
-        <div id="opts" class="col s12 m7 offset-m1 opts">
+        <section id="opts" class="col s12 m7 offset-m1 opts">
           <h6>Tilte</h6>
           <div class="input-field">
             <input placeholder="Input your title." name="title" id="title" type="text" class="validate" value="Hello">
@@ -59,11 +58,10 @@
           <h6 class="p-t-10px">Position</h6>
           <div class="postions m-t-15px">
             <label>
-              <input name="position" type="radio" checked value="tr" />
-              <span>tr</span>
+              <input name="position" type="radio" checked value="tr" /><span>tr</span>
             </label>
             <label>
-              <input name="position" type="radio" value="tm"/>
+              <input name="position" type="radio" value="tm" />
               <span>tm</span>
             </label>
             <label>
@@ -91,7 +89,7 @@
               <span>bm</span>
             </label>
             <label>
-              <input name="position" type="radio" value="bl"/>
+              <input name="position" type="radio" value="bl" />
               <span>bl</span>
             </label>
           </div>
@@ -100,10 +98,10 @@
               <h6>Progress</h6>
               <div class="switch m-t-15px">
                 <label>
-                  false
+                  hide
                   <input type="checkbox" checked name="progress">
                   <span class="lever"></span>
-                  true
+                  hide
                 </label>
               </div>
             </div>
@@ -122,10 +120,10 @@
               <h6>CloseBtn</h6>
               <div class="switch m-t-15px">
                 <label>
-                  false
+                  hide
                   <input type="checkbox" name="closeBtn" checked>
                   <span class="lever"></span>
-                  true
+                  show
                 </label>
               </div>
             </div>
@@ -143,7 +141,7 @@
               </div>
             </div>
             <div>
-              <h6>onClcik</h6>
+              <h6>onClick</h6>
               <div class="switch m-t-15px">
                 <label>
                   false
@@ -165,7 +163,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
         <section class="col s12 m3 offset-m1 btns">
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="text">Text</button>
           <button class="btn btn-large waves-effect waves-light z-depth-3" data-type="log">Log</button>
@@ -179,7 +177,7 @@
   </div>
   <footer>
   </footer>
-  <script src="dist/index.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>

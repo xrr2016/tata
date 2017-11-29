@@ -1,6 +1,14 @@
 import './index.css'
 import tata from '../dist/tata'
 
+function $(selector) {
+  return document.querySelector(selector)
+}
+
+function $$(selector) {
+  return document.querySelectorAll(selector)
+}
+
 function onClick () {
   alert('clicked.')
 }
@@ -13,8 +21,7 @@ document.addEventListener('readystatechange', () => {
   if (document.readyState === 'complete') {
     const loading = document.querySelector('.loading')
     const btns = document.querySelector('.btns')
-    const inputs = document.querySelectorAll('input')
-
+    
     if (loading.remove) {
       loading.remove()
     } else {
