@@ -43,6 +43,7 @@ module.exports = {
     extensions: ['.js', '.css', '.json']
   },
   devtool: 'inline-source-map',
+  // context: path.resolve(__dirname, 'dist'),
   context: __dirname,
   devServer: {
     contentBase: __dirname,

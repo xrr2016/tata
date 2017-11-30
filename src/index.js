@@ -1,4 +1,5 @@
 import './index.css'
+import tata from './tata'
 
 function $(selector) {
   return document.querySelector(selector)

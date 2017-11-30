@@ -8,6 +8,16 @@
 
 > yarn add tata-js
 
+```js
+import tata from 'tata-js
+```
+
+OR
+
+```html
+<script src="tata.js"></script>
+```
+
 ## Usage
 
 ```js

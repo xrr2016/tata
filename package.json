@@ -1,10 +1,10 @@
 {
   "name": "tata-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/tata.js",
   "module": "src/tata.js",
   "scripts": {
-    "build": "webpack -w --config webpack.build.js",
+    "build": "webpack --config webpack.build.js",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "test": "jest --watchAll --colors --coverage"
   },
