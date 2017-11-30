@@ -10,7 +10,7 @@ module.exports = {
     filename: 'tata.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'tata',
-    libraryTarget: 'umd'
+    libraryTarget: 'window'
   },
   target: 'web',
   module: {

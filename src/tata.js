@@ -259,4 +259,4 @@ function render(title, text, opts) {
 
 document.addEventListener('click', closeTaTa, false)
 
-module.exports = tata
+export default tata

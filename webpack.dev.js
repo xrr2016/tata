@@ -2,13 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: { 
     index: './src/index'
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: __dirname,
     filename: '[name].js'
   },
   module: {
@@ -21,20 +22,10 @@ module.exports = {
       {
         test: /\.css$/,
         include: [path.resolve(__dirname, 'src')],
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          }
-        ]
+         use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "postcss-loader"]
+        })
       }
     ]
   },
@@ -42,7 +33,6 @@ module.exports = {
     modules: ['node_modules', path.resolve(__dirname, 'src')],
     extensions: ['.js', '.css', '.json']
   },
-  devtool: 'inline-source-map',
   // context: path.resolve(__dirname, 'dist'),
   context: __dirname,
   devServer: {
@@ -53,6 +43,7 @@ module.exports = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin("index.css")
   ]
 }

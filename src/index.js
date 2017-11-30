@@ -1,5 +1,4 @@
 import './index.css'
-import tata from './tata'
 
 function $(selector) {
   return document.querySelector(selector)
@@ -9,24 +8,21 @@ function $$(selector) {
   return document.querySelectorAll(selector)
 }
 
-function onClick () {
+function onClick() {
   alert('clicked.')
 }
 
-function onClose () {
+function onClose() {
   alert('closed.')
 }
+
 
 document.addEventListener('readystatechange', () => {
   if (document.readyState === 'complete') {
     const loading = $('.loading')
     const btns = $('.btns')
-    
-    if (loading.remove) {
-      loading.remove()
-    } else {
-      document.body.removeChild(loading)
-    }
+
+    document.body.removeChild(loading)
 
     btns.addEventListener('click', event => {
       const target = event.target
@@ -42,12 +38,12 @@ document.addEventListener('readystatechange', () => {
       tata[type](title, text, {
         duration: $('#duration').value * 1000,
         position,
-        progress: $('input[name=progress]').checked,        
-        holding: $('input[name=holding]').checked,        
+        progress: $('input[name=progress]').checked,
+        holding: $('input[name=holding]').checked,
         animate: $('input[name=animate]').checked ? 'slide' : 'fade',
         closeBtn: $('input[name=closeBtn]').checked,
         onClick: $('input[name=onClick]').checked ? onClick : null,
-        onClose: $('input[name=onClose]').checked ? onClose : null,
+        onClose: $('input[name=onClose]').checked ? onClose : null
       })
     })
   }
