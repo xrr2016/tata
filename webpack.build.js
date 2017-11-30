@@ -1,9 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require("compression-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'tata'),
+  entry: ['./src/index.js', './src/tata.css'],
   output: {
     filename: 'tata.js',
     path: path.resolve(__dirname, 'dist'),
@@ -11,14 +13,16 @@ module.exports = {
     libraryTarget: 'umd'
   },
   target: 'web',
-  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.css$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
-        use: ['style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       },
       {
         test: /.js?$/,
@@ -29,14 +33,13 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
         drop_console: true
       }
     }),
-    new CompressionPlugin({
-      algorithm: 'gzip'
-    })
+    new ExtractTextPlugin("tata.css")
   ]
 }

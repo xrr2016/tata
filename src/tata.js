@@ -1,4 +1,3 @@
-import './tata.css'
 const iconLink = document.createElement('link')
 iconLink.rel = 'stylesheet'
 iconLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons'
