@@ -2,14 +2,14 @@
 
 [Live Demo](http://xiaoranran.site/tata/)
 
-[![GitHub issues](https://img.shields.io/github/issues/xrr2016/tata.svg)](https://github.com/xrr2016/tata/issues) [![GitHub forks](https://img.shields.io/github/forks/xrr2016/tata.svg)](https://github.com/xrr2016/tata/network) [![GitHub stars](https://img.shields.io/github/stars/xrr2016/tata.svg)](https://github.com/xrr2016/tata/stargazers) 
+[![GitHub issues](https://img.shields.io/github/issues/xrr2016/tata.svg)](https://github.com/xrr2016/tata/issues) [![GitHub forks](https://img.shields.io/github/forks/xrr2016/tata.svg)](https://github.com/xrr2016/tata/network) [![GitHub stars](https://img.shields.io/github/stars/xrr2016/tata.svg)](https://github.com/xrr2016/tata/stargazers)
 
 ## Install
 
 > yarn add tata-js
 
 ```js
-import tata from 'tata-js
+import tata from 'tata-js'
 ```
 
 OR
