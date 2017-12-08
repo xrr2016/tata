@@ -5,7 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: ['./src/tata.js', './src/tata.css'],
+  entry: ['./src/tata.js'],
   output: {
     filename: 'tata.js',
     path: path.resolve(__dirname, 'dist'),

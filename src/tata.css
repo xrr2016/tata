@@ -4,7 +4,6 @@
   justify-content: space-around;
   align-items: center;
   width: 300px;
-  opacity: .9;
   border-radius: 3px;
   color: #ffffff;
   font-size: 16px;
@@ -195,13 +194,13 @@
   }
 
   to {
-    opacity: .9;
+    opacity: 1;
   }
 }
 
 @keyframes fadeOut {
   from {
-    opacity: .9;
+    opacity: 1;
   }
 
   to {

@@ -1,78 +1,17 @@
 import './tata.css'
-const iconLink = document.createElement('link')
-iconLink.rel = 'stylesheet'
-iconLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons'
-document.head.appendChild(iconLink)
 
-const defaultOpts = {
-  type: 'log',
-  position: 'tr',
-  animate: 'fade', // slide
-  duration: 3000,
-  progress: true,
-  holding: false,
-  closeBtn: true,
-  onClick: null,
-  onClose: null
+function randomId() {
+  return `tata-${Date.now()}`
 }
 
-const tatas = []
-const tata = {
-  text(
-    title = '你好',
-    text = '你好, 今天是' + new Date().toLocaleString(),
-    opts = {}
-  ) {
-    const _opts = Object.assign({}, defaultOpts, opts, { type: 'text' })
-    render(title, text, _opts)
-  },
-  log(
-    title = '你好',
-    text = '今天是' + new Date().toLocaleString(),
-    opts = {}
-  ) {
-    const _opts = Object.assign({}, defaultOpts, opts, { type: 'log' })
-    render(title, text, _opts)
-  },
-  info(
-    title = '你好',
-    text = '今天是' + new Date().toLocaleString(),
-    opts = {}
-  ) {
-    const _opts = Object.assign({}, defaultOpts, opts, { type: 'info' })
-    render(title, text, _opts)
-  },
-  warn(
-    title = '你好',
-    text = '今天是' + new Date().toLocaleString(),
-    opts = {}
-  ) {
-    const _opts = Object.assign({}, defaultOpts, opts, { type: 'warn' })
-    render(title, text, _opts)
-  },
-  error(
-    title = '你好',
-    text = '今天是' + new Date().toLocaleString(),
-    opts = {}
-  ) {
-    const _opts = Object.assign({}, defaultOpts, opts, { type: 'error' })
-    render(title, text, _opts)
-  },
-  success(
-    title = '你好',
-    text = '今天是' + new Date().toLocaleString(),
-    opts = {}
-  ) {
-    const _opts = Object.assign({}, defaultOpts, opts, { type: 'success' })
-    render(title, text, _opts)
-  },
-  clear() {
-    tatas.forEach(tata => {
-      removeElement(document.getElementById(tata.id))
-    })
-    tatas.length = 0
-  }
+function addIconsLink(href) {
+  const iconLink = document.createElement('link')
+  iconLink.rel = 'stylesheet'
+  iconLink.href = href
+  document.head.appendChild(iconLink)
 }
+
+addIconsLink('https://fonts.googleapis.com/icon?family=Material+Icons')
 
 function mapPostion(pos = 'tr') {
   switch (pos) {
@@ -113,6 +52,8 @@ function type2Icon(type = 'text') {
       return 'check'
     case 'error':
       return 'block'
+    case 'ask':
+      return 'help_outline'  
     default:
       return ''
   }
@@ -132,11 +73,12 @@ function mapAnimateIn(animate = 'fade', position = 'tr') {
       case 'tm':
         return 'slide-top-in'
       case 'bm':
-        return 'slide-bottom-in'  
+        return 'slide-bottom-in'
     }
   }
   return 'fade-in'
 }
+
 function mapAnimateOut(animate = 'fade', position = 'tr') {
   if (animate === 'slide') {
     switch (position) {
@@ -151,14 +93,10 @@ function mapAnimateOut(animate = 'fade', position = 'tr') {
       case 'tm':
         return 'slide-top-out'
       case 'bm':
-        return 'slide-bottom-out'  
+        return 'slide-bottom-out'
     }
   }
   return 'fade-out'
-}
-
-function randomId() {
-  return `tata-${Date.now()}`
 }
 
 function clickTaTa(event) {
@@ -174,7 +112,6 @@ function closeTaTa(event) {
   const ta = tatas.find(ta => ta.id === id)
   const element = document.getElementById(id)
 
-  console.log(mapAnimateOut(ta.opts.animate, ta.opts.position))
   element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position))
   removeElement(element)
 
@@ -182,6 +119,10 @@ function closeTaTa(event) {
     typeof ta.opts.onClose === 'function' &&
     ta.opts.onClose.call(ta)
 }
+
+document.addEventListener('click', closeTaTa, false)
+
+const tatas = []
 
 function removeElement(element) {
   const timeout = setTimeout(() => {
@@ -195,39 +136,38 @@ function removeElement(element) {
 }
 
 function render(title, text, opts) {
+  const id = randomId() 
   const icon = type2Icon(opts.type)
   const position = mapPostion(opts.position)
   const animate = mapAnimateIn(opts.animate, opts.position)
-  const id = randomId()
   const ta = { title, text, opts, id }
   const idx = tatas.findIndex(tata => tata.id === id)
-  const prevtata = idx === 0 ? null : tatas[idx - 1]
-
+  const prevTa = idx === 0 ? null : tatas[idx - 1]
   tatas.push(ta)
 
   const template = `
-    <div class="tata ${opts.type} ${animate} ${position}" id=${id}>
-      <i class="tata-icon material-icons">${icon}</i>
-      <div class="tata-body">
-        <h4 class="tata-title">${title}</h4>
-        <p class="tata-text">${text}</p>
-      </div>
-      ${
-        opts.closeBtn
-          ? '<button class="tata-close material-icons">clear</button>'
-          : ''
-      }
-      ${
-        !opts.holding && opts.progress
-          ? '<div class="tata-progress"></div>'
-          : ''
-      }
+  <div class="tata ${opts.type} ${animate} ${position}" id=${id}>
+    <i class="tata-icon material-icons">${icon}</i>
+    <div class="tata-body">
+      <h4 class="tata-title">${title}</h4>
+      <p class="tata-text">${text}</p>
     </div>
-  `
+    ${opts.closeBtn || opts.holding ?
+      '<button class="tata-close material-icons">clear</button>' : ''
+    }
+    ${!opts.holding && opts.progress ?
+      '<div class="tata-progress"></div>' : ''
+    }
+  </div>
+ `
+
   document.body.insertAdjacentHTML('beforeend', template)
-  if (prevtata && prevtata.opts.position === ta.opts.position) {
-    removeElement(document.getElementById(prevtata.id))
+  console.log(performance.now())
+
+  if (prevTa && prevTa.opts.position === ta.opts.position) {
+    removeElement(document.getElementById(prevTa.id))
   }
+
   const element = document.getElementById(id)
 
   !!opts.onClick &&
@@ -237,26 +177,74 @@ function render(title, text, opts) {
       once: true
     })
 
-  console.log(performance.now())
   if (!opts.holding && opts.progress) {
     const progress = element.querySelector('.tata-progress')
-    progress.style.animation = `${opts.duration /
-      1000}s reduceWidth linear forwards`
+    progress.style.animation = `${opts.duration / 1000}s reduceWidth linear forwards`
 
-    const timeout = setTimeout(() => {
+    const vanish = setTimeout(() => {
       const idx = tatas.findIndex(ta => ta === ta)
       tatas.splice(idx, 1)
-      console.log(mapAnimateOut(ta.opts.animate, ta.opts.position))
       element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position))
       console.log(performance.now())
       removeElement(element)
+      clearTimeout(vanish)
       !!ta.opts.onClose &&
         typeof ta.opts.onClose === 'function' &&
         ta.opts.onClose.call(ta)
     }, opts.duration)
+
   }
 }
 
-document.addEventListener('click', closeTaTa, false)
+const defaultOpts = {
+  type: 'log',
+  position: 'tr',
+  animate: 'fade', // slide
+  duration: 3000,
+  progress: true,
+  holding: false,
+  closeBtn: true,
+  onClick: null,
+  onClose: null
+}
 
-export default tata
+
+export function text(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'text' })
+  render(title, text, _opts)
+}
+
+export function log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'log' })
+  render(title, text, _opts)
+}
+
+export function info(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'info' })
+  render(title, text, _opts)
+}
+
+export function warn(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'warn' })
+  render(title, text, _opts)
+}
+
+export function error(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'error' })
+  render(title, text, _opts)
+}
+
+export function success(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'success' })
+  render(title, text, _opts)
+}
+
+export function ask() {
+  const _opts = Object.assign({}, defaultOpts, opts, { type: 'ask' })
+  render(title, text, _opts)
+}
+
+export function clear() {
+  tatas.forEach(tata => removeElement(document.getElementById(tata.id)))
+  tatas.length = 0
+}

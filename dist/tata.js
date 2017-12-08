@@ -61,50 +61,18 @@ window["tata"] =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+module.exports = __webpack_require__(1);
 
-// load the styles
-var content = __webpack_require__(3);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(5)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!./tata.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!./tata.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(2);
-module.exports = __webpack_require__(0);
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -113,83 +81,29 @@ module.exports = __webpack_require__(0);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.text = text;
+exports.log = log;
+exports.info = info;
+exports.warn = warn;
+exports.error = error;
+exports.success = success;
+exports.ask = ask;
+exports.clear = clear;
 
-__webpack_require__(0);
+__webpack_require__(2);
 
-var iconLink = document.createElement('link');
-iconLink.rel = 'stylesheet';
-iconLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-document.head.appendChild(iconLink);
+function randomId() {
+  return 'tata-' + Date.now();
+}
 
-var defaultOpts = {
-  type: 'log',
-  position: 'tr',
-  animate: 'fade', // slide
-  duration: 3000,
-  progress: true,
-  holding: false,
-  closeBtn: true,
-  onClick: null,
-  onClose: null
-};
+function addIconsLink(href) {
+  var iconLink = document.createElement('link');
+  iconLink.rel = 'stylesheet';
+  iconLink.href = href;
+  document.head.appendChild(iconLink);
+}
 
-var tatas = [];
-var tata = {
-  text: function text() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
-    var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '你好, 今天是' + new Date().toLocaleString();
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var _opts = Object.assign({}, defaultOpts, opts, { type: 'text' });
-    render(title, text, _opts);
-  },
-  log: function log() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
-    var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var _opts = Object.assign({}, defaultOpts, opts, { type: 'log' });
-    render(title, text, _opts);
-  },
-  info: function info() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
-    var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var _opts = Object.assign({}, defaultOpts, opts, { type: 'info' });
-    render(title, text, _opts);
-  },
-  warn: function warn() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
-    var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var _opts = Object.assign({}, defaultOpts, opts, { type: 'warn' });
-    render(title, text, _opts);
-  },
-  error: function error() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
-    var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var _opts = Object.assign({}, defaultOpts, opts, { type: 'error' });
-    render(title, text, _opts);
-  },
-  success: function success() {
-    var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
-    var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-    var _opts = Object.assign({}, defaultOpts, opts, { type: 'success' });
-    render(title, text, _opts);
-  },
-  clear: function clear() {
-    tatas.forEach(function (tata) {
-      removeElement(document.getElementById(tata.id));
-    });
-    tatas.length = 0;
-  }
-};
+addIconsLink('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 function mapPostion() {
   var pos = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'tr';
@@ -234,6 +148,8 @@ function type2Icon() {
       return 'check';
     case 'error':
       return 'block';
+    case 'ask':
+      return 'help_outline';
     default:
       return '';
   }
@@ -261,6 +177,7 @@ function mapAnimateIn() {
   }
   return 'fade-in';
 }
+
 function mapAnimateOut() {
   var animate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'fade';
   var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'tr';
@@ -284,10 +201,6 @@ function mapAnimateOut() {
   return 'fade-out';
 }
 
-function randomId() {
-  return 'tata-' + Date.now();
-}
-
 function clickTaTa(event) {
   var target = event.target;
   if (target.classList.contains('tata-close')) return;
@@ -303,12 +216,15 @@ function closeTaTa(event) {
   });
   var element = document.getElementById(id);
 
-  console.log(mapAnimateOut(ta.opts.animate, ta.opts.position));
   element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position));
   removeElement(element);
 
   !!ta.opts.onClose && typeof ta.opts.onClose === 'function' && ta.opts.onClose.call(ta);
 }
+
+document.addEventListener('click', closeTaTa, false);
+
+var tatas = [];
 
 function removeElement(element) {
   var timeout = setTimeout(function () {
@@ -322,23 +238,26 @@ function removeElement(element) {
 }
 
 function render(title, text, opts) {
+  var id = randomId();
   var icon = type2Icon(opts.type);
   var position = mapPostion(opts.position);
   var animate = mapAnimateIn(opts.animate, opts.position);
-  var id = randomId();
   var ta = { title: title, text: text, opts: opts, id: id };
   var idx = tatas.findIndex(function (tata) {
     return tata.id === id;
   });
-  var prevtata = idx === 0 ? null : tatas[idx - 1];
-
+  var prevTa = idx === 0 ? null : tatas[idx - 1];
   tatas.push(ta);
 
-  var template = '\n    <div class="tata ' + opts.type + ' ' + animate + ' ' + position + '" id=' + id + '>\n      <i class="tata-icon material-icons">' + icon + '</i>\n      <div class="tata-body">\n        <h4 class="tata-title">' + title + '</h4>\n        <p class="tata-text">' + text + '</p>\n      </div>\n      ' + (opts.closeBtn ? '<button class="tata-close material-icons">clear</button>' : '') + '\n      ' + (!opts.holding && opts.progress ? '<div class="tata-progress"></div>' : '') + '\n    </div>\n  ';
+  var template = '\n  <div class="tata ' + opts.type + ' ' + animate + ' ' + position + '" id=' + id + '>\n    <i class="tata-icon material-icons">' + icon + '</i>\n    <div class="tata-body">\n      <h4 class="tata-title">' + title + '</h4>\n      <p class="tata-text">' + text + '</p>\n    </div>\n    ' + (opts.closeBtn || opts.holding ? '<button class="tata-close material-icons">clear</button>' : '') + '\n    ' + (!opts.holding && opts.progress ? '<div class="tata-progress"></div>' : '') + '\n  </div>\n ';
+
   document.body.insertAdjacentHTML('beforeend', template);
-  if (prevtata && prevtata.opts.position === ta.opts.position) {
-    removeElement(document.getElementById(prevtata.id));
+  console.log(performance.now());
+
+  if (prevTa && prevTa.opts.position === ta.opts.position) {
+    removeElement(document.getElementById(prevTa.id));
   }
+
   var element = document.getElementById(id);
 
   !!opts.onClick && typeof opts.onClick === 'function' && element.addEventListener('click', clickTaTa.bind(ta), {
@@ -346,28 +265,132 @@ function render(title, text, opts) {
     once: true
   });
 
-  console.log(performance.now());
   if (!opts.holding && opts.progress) {
     var progress = element.querySelector('.tata-progress');
     progress.style.animation = opts.duration / 1000 + 's reduceWidth linear forwards';
 
-    var timeout = setTimeout(function () {
+    var vanish = setTimeout(function () {
       var idx = tatas.findIndex(function (ta) {
         return ta === ta;
       });
       tatas.splice(idx, 1);
-      console.log(mapAnimateOut(ta.opts.animate, ta.opts.position));
       element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position));
       console.log(performance.now());
       removeElement(element);
+      clearTimeout(vanish);
       !!ta.opts.onClose && typeof ta.opts.onClose === 'function' && ta.opts.onClose.call(ta);
     }, opts.duration);
   }
 }
 
-document.addEventListener('click', closeTaTa, false);
+var defaultOpts = {
+  type: 'log',
+  position: 'tr',
+  animate: 'fade', // slide
+  duration: 3000,
+  progress: true,
+  holding: false,
+  closeBtn: true,
+  onClick: null,
+  onClose: null
+};
 
-exports.default = tata;
+function text() {
+  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
+  var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'text' });
+  render(title, text, _opts);
+}
+
+function log() {
+  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
+  var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'log' });
+  render(title, text, _opts);
+}
+
+function info() {
+  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
+  var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'info' });
+  render(title, text, _opts);
+}
+
+function warn() {
+  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
+  var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'warn' });
+  render(title, text, _opts);
+}
+
+function error() {
+  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
+  var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'error' });
+  render(title, text, _opts);
+}
+
+function success() {
+  var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '你好';
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '今天是' + new Date().toLocaleString();
+  var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'success' });
+  render(title, text, _opts);
+}
+
+function ask() {
+  var _opts = Object.assign({}, defaultOpts, opts, { type: 'ask' });
+  render(title, text, _opts);
+}
+
+function clear() {
+  tatas.forEach(function (tata) {
+    return removeElement(document.getElementById(tata.id));
+  });
+  tatas.length = 0;
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(3);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(5)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!./tata.css", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!./tata.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 /* 3 */
@@ -378,7 +401,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, ".tata {\r\n  position: fixed;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  align-items: center;\r\n  width: 300px;\r\n  opacity: .9;\r\n  border-radius: 3px;\r\n  color: #ffffff;\r\n  font-size: 16px;\r\n  z-index: 9999;\r\n  pointer-events: auto;\r\n  padding: 12px 14px 12px 20px;\r\n  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.tata:hover {\r\n  opacity: 1;\r\n}\r\n\r\n.tata * {\r\n  box-sizing: border-box;\r\n}\r\n\r\n.tata .tata-icon {\r\n  font-size: 2em;\r\n  color: inherit;\r\n}\r\n\r\n.tata .tata-body {\r\n  margin: 0;\r\n  padding: 0 14px;\r\n  min-height: 38px;\r\n  min-width: 260px;\r\n}\r\n\r\n.tata .tata-title {\r\n  margin: 0 0 2px 0;\r\n  font-size: 1em;\r\n}\r\n\r\n.tata .tata-text {\r\n  margin: 0;\r\n  font-size: .9em;\r\n}\r\n\r\n.tata .tata-close {\r\n  position: absolute;\r\n  top: 6px;\r\n  right: 6px;\r\n  border: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-size: 1em;\r\n  font-weight: bold;\r\n  color: inherit;\r\n  cursor: pointer;\r\n  outline: none;\r\n  background: transparent;\r\n}\r\n\r\n.tata-progress {\r\n  position: absolute;\r\n  bottom: -1px;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 5px;\r\n  border-radius: 0 0 3px 3px;\r\n  background: rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.tata .tata-close:hover {\r\n  opacity: 0.4;\r\n}\r\n\r\n.tata.top-right {\r\n  top: 12px;\r\n  right: 12px;\r\n}\r\n\r\n.tata.top-mid {\r\n  top: 12px;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n}\r\n\r\n.tata.top-left {\r\n  top: 12px;\r\n  left: 12px;\r\n}\r\n\r\n.tata.bottom-right {\r\n  right: 12px;\r\n  bottom: 18px;\r\n}\r\n\r\n.tata.bottom-mid {\r\n  left: 50%;\r\n  bottom: 18px;\r\n  transform: translateX(-50%);\r\n}\r\n\r\n.tata.bottom-left {\r\n  bottom: 18px;\r\n  left: 12px;\r\n}\r\n\r\n.tata.mid-right {\r\n  top: 50%;\r\n  right: 12px;\r\n  transform: translateY(-50%);\r\n}\r\n\r\n.tata.mid-left {\r\n  top: 50%;\r\n  left: 12px;\r\n  transform: translateY(-50%);\r\n}\r\n\r\n.tata.mid-mid {\r\n  top: 35%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.tata.text {\r\n  color: #fff;\r\n  background: #323232;\r\n}\r\n\r\n.tata.log {\r\n  color: #333333;\r\n  background: #fffffc;\r\n}\r\n\r\n.tata.info {\r\n  background: #2ca9e1;\r\n}\r\n\r\n.tata.warn {\r\n  background: #f89406;\r\n}\r\n\r\n.tata.error {\r\n  background: #e9546b;\r\n}\r\n\r\n.tata.success {\r\n  background: #38b48b;\r\n}\r\n\r\n.tata.fade-in {\r\n  animation: .4s ease-in fadeIn forwards;\r\n}\r\n\r\n.tata.fade-out {\r\n  animation: .4s linear fadeOut forwards;\r\n}\r\n\r\n.tata.slide-right-in {\r\n  animation: .4s ease slideRightIn forwards;\r\n}\r\n\r\n.tata.slide-right-out {\r\n  animation: .4s ease slideRightOut forwards;\r\n}\r\n\r\n.tata.slide-left-in {\r\n  animation: .4s ease slideLeftIn forwards;\r\n}\r\n\r\n.tata.slide-left-out {\r\n  animation: .4s ease slideLeftOut forwards;\r\n}\r\n\r\n.tata.slide-top-in {\r\n  animation: .4s ease slideTopIn forwards;\r\n}\r\n\r\n.tata.slide-top-out {\r\n  animation: .4s ease slideTopOut forwards;\r\n}\r\n\r\n.tata.slide-bottom-in {\r\n  animation: .4s ease slideBottomIn forwards;\r\n}\r\n\r\n.tata.slide-bottom-out {\r\n  animation: .4s ease slideBottomOut forwards;\r\n}\r\n\r\n@keyframes fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n\r\n  to {\r\n    opacity: .9;\r\n  }\r\n}\r\n\r\n@keyframes fadeOut {\r\n  from {\r\n    opacity: .9;\r\n  }\r\n\r\n  to {\r\n    opacity: 0;\r\n  }\r\n}\r\n\r\n@keyframes slideRightIn {\r\n  from {\r\n    right: -310px;\r\n  }\r\n\r\n  to {\r\n    right: 12px;\r\n  }\r\n}\r\n\r\n@keyframes slideRightOut {\r\n  from {\r\n    right: 12px;\r\n  }\r\n\r\n  to {\r\n    right: -310px;\r\n  }\r\n}\r\n\r\n@keyframes slideLeftIn {\r\n  from {\r\n    left: -310px;\r\n  }\r\n\r\n  to {\r\n    left: 12px;\r\n  }\r\n}\r\n\r\n@keyframes slideLeftOut {\r\n  from {\r\n    left: 12px;\r\n  }\r\n\r\n  to {\r\n    left: -310px;\r\n  }\r\n}\r\n\r\n@keyframes slideTopIn {\r\n  from {\r\n    top: calc(-100% + -12px);\r\n  }\r\n  to {\r\n    top: 12px;\r\n  }\r\n}\r\n\r\n@keyframes slideTopOut {\r\n  from {\r\n    top: 12px;\r\n  }\r\n  to {\r\n    top: calc(-100% + -12px);\r\n  }\r\n}\r\n\r\n@keyframes slideBottomIn {\r\n  from {\r\n    bottom: calc(-100% + -18px);\r\n  }\r\n  to {\r\n    bottom: 18px;\r\n  }\r\n}\r\n\r\n@keyframes slideBottomOut {\r\n  from {\r\n    bottom: 18px;\r\n  }\r\n  to {\r\n    bottom: calc(-100% + -18px);\r\n  }\r\n}\r\n\r\n@keyframes reduceWidth {\r\n  from {\r\n    width: 100%;\r\n  }\r\n\r\n  to {\r\n    width: 0%;\r\n  }\r\n}", ""]);
+exports.push([module.i, ".tata {\r\n  position: fixed;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  align-items: center;\r\n  width: 300px;\r\n  border-radius: 3px;\r\n  color: #ffffff;\r\n  font-size: 16px;\r\n  z-index: 9999;\r\n  pointer-events: auto;\r\n  padding: 12px 14px 12px 20px;\r\n  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.tata:hover {\r\n  opacity: 1;\r\n}\r\n\r\n.tata * {\r\n  box-sizing: border-box;\r\n}\r\n\r\n.tata .tata-icon {\r\n  font-size: 2em;\r\n  color: inherit;\r\n}\r\n\r\n.tata .tata-body {\r\n  margin: 0;\r\n  padding: 0 14px;\r\n  min-height: 38px;\r\n  min-width: 260px;\r\n}\r\n\r\n.tata .tata-title {\r\n  margin: 0 0 2px 0;\r\n  font-size: 1em;\r\n}\r\n\r\n.tata .tata-text {\r\n  margin: 0;\r\n  font-size: .9em;\r\n}\r\n\r\n.tata .tata-close {\r\n  position: absolute;\r\n  top: 6px;\r\n  right: 6px;\r\n  border: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-size: 1em;\r\n  font-weight: bold;\r\n  color: inherit;\r\n  cursor: pointer;\r\n  outline: none;\r\n  background: transparent;\r\n}\r\n\r\n.tata-progress {\r\n  position: absolute;\r\n  bottom: -1px;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 5px;\r\n  border-radius: 0 0 3px 3px;\r\n  background: rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.tata .tata-close:hover {\r\n  opacity: 0.4;\r\n}\r\n\r\n.tata.top-right {\r\n  top: 12px;\r\n  right: 12px;\r\n}\r\n\r\n.tata.top-mid {\r\n  top: 12px;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n}\r\n\r\n.tata.top-left {\r\n  top: 12px;\r\n  left: 12px;\r\n}\r\n\r\n.tata.bottom-right {\r\n  right: 12px;\r\n  bottom: 18px;\r\n}\r\n\r\n.tata.bottom-mid {\r\n  left: 50%;\r\n  bottom: 18px;\r\n  transform: translateX(-50%);\r\n}\r\n\r\n.tata.bottom-left {\r\n  bottom: 18px;\r\n  left: 12px;\r\n}\r\n\r\n.tata.mid-right {\r\n  top: 50%;\r\n  right: 12px;\r\n  transform: translateY(-50%);\r\n}\r\n\r\n.tata.mid-left {\r\n  top: 50%;\r\n  left: 12px;\r\n  transform: translateY(-50%);\r\n}\r\n\r\n.tata.mid-mid {\r\n  top: 35%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.tata.text {\r\n  color: #fff;\r\n  background: #323232;\r\n}\r\n\r\n.tata.log {\r\n  color: #333333;\r\n  background: #fffffc;\r\n}\r\n\r\n.tata.info {\r\n  background: #2ca9e1;\r\n}\r\n\r\n.tata.warn {\r\n  background: #f89406;\r\n}\r\n\r\n.tata.error {\r\n  background: #e9546b;\r\n}\r\n\r\n.tata.success {\r\n  background: #38b48b;\r\n}\r\n\r\n.tata.fade-in {\r\n  animation: .4s ease-in fadeIn forwards;\r\n}\r\n\r\n.tata.fade-out {\r\n  animation: .4s linear fadeOut forwards;\r\n}\r\n\r\n.tata.slide-right-in {\r\n  animation: .4s ease slideRightIn forwards;\r\n}\r\n\r\n.tata.slide-right-out {\r\n  animation: .4s ease slideRightOut forwards;\r\n}\r\n\r\n.tata.slide-left-in {\r\n  animation: .4s ease slideLeftIn forwards;\r\n}\r\n\r\n.tata.slide-left-out {\r\n  animation: .4s ease slideLeftOut forwards;\r\n}\r\n\r\n.tata.slide-top-in {\r\n  animation: .4s ease slideTopIn forwards;\r\n}\r\n\r\n.tata.slide-top-out {\r\n  animation: .4s ease slideTopOut forwards;\r\n}\r\n\r\n.tata.slide-bottom-in {\r\n  animation: .4s ease slideBottomIn forwards;\r\n}\r\n\r\n.tata.slide-bottom-out {\r\n  animation: .4s ease slideBottomOut forwards;\r\n}\r\n\r\n@keyframes fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes fadeOut {\r\n  from {\r\n    opacity: 1;\r\n  }\r\n\r\n  to {\r\n    opacity: 0;\r\n  }\r\n}\r\n\r\n@keyframes slideRightIn {\r\n  from {\r\n    right: -310px;\r\n  }\r\n\r\n  to {\r\n    right: 12px;\r\n  }\r\n}\r\n\r\n@keyframes slideRightOut {\r\n  from {\r\n    right: 12px;\r\n  }\r\n\r\n  to {\r\n    right: -310px;\r\n  }\r\n}\r\n\r\n@keyframes slideLeftIn {\r\n  from {\r\n    left: -310px;\r\n  }\r\n\r\n  to {\r\n    left: 12px;\r\n  }\r\n}\r\n\r\n@keyframes slideLeftOut {\r\n  from {\r\n    left: 12px;\r\n  }\r\n\r\n  to {\r\n    left: -310px;\r\n  }\r\n}\r\n\r\n@keyframes slideTopIn {\r\n  from {\r\n    top: calc(-100% + -12px);\r\n  }\r\n  to {\r\n    top: 12px;\r\n  }\r\n}\r\n\r\n@keyframes slideTopOut {\r\n  from {\r\n    top: 12px;\r\n  }\r\n  to {\r\n    top: calc(-100% + -12px);\r\n  }\r\n}\r\n\r\n@keyframes slideBottomIn {\r\n  from {\r\n    bottom: calc(-100% + -18px);\r\n  }\r\n  to {\r\n    bottom: 18px;\r\n  }\r\n}\r\n\r\n@keyframes slideBottomOut {\r\n  from {\r\n    bottom: 18px;\r\n  }\r\n  to {\r\n    bottom: calc(-100% + -18px);\r\n  }\r\n}\r\n\r\n@keyframes reduceWidth {\r\n  from {\r\n    width: 100%;\r\n  }\r\n\r\n  to {\r\n    width: 0%;\r\n  }\r\n}", ""]);
 
 // exports
 

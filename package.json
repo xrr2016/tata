@@ -4,7 +4,7 @@
   "main": "dist/tata.js",
   "module": "src/tata.js",
   "scripts": {
-    "build": "webpack --config webpack.build.js",
+    "build": "webpack --config webpack.build.js -w",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "test": "jest --watchAll --colors --coverage"
   },
