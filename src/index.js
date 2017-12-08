@@ -1,5 +1,3 @@
-import './index.css'
-
 function $(selector) {
   return document.querySelector(selector)
 }
