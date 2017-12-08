@@ -5,7 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: ['./src/index.js', './src/tata.css'],
+  entry: ['./src/tata.js', './src/tata.css'],
   output: {
     filename: 'tata.js',
     path: path.resolve(__dirname, 'dist'),
@@ -13,7 +13,7 @@ module.exports = {
     libraryTarget: 'window'
   },
   target: 'web',
-  module: {
+  module: { 
     rules: [
       {
         test: /\.css$/,
@@ -35,12 +35,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: true
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //     drop_console: true
+    //   }
+    // })
     // new ExtractTextPlugin("tata.css")
   ]
 }
