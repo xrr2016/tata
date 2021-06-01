@@ -182,7 +182,7 @@ function render(title, text, opts) {
     progress.style.animation = `${opts.duration / 1000}s reduceWidth linear forwards`
 
     const vanish = setTimeout(() => {
-      const idx = tatas.findIndex(ta => ta === ta)
+      const idx = tatas.findIndex(t => t.id === ta.id)
       tatas.splice(idx, 1)
       element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position))
       console.log(performance.now())
